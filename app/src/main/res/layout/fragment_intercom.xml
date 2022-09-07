@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".IntercomFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="18dp"
+        android:fontFamily="@font/circe_regular"
+        android:text="@string/common_intercom"
+        android:textColor="@color/headers_color"
+        android:textSize="21sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/intercom_translation"
+        android:paddingBottom="16dp">
+
+        <ImageView
+            android:id="@+id/eye"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/eye"
+            android:contentDescription="@string/img_des"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/visitors" />
+
+        <TextView
+            android:id="@+id/visitors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/img_des"
+            android:text="@string/visitors"
+            android:fontFamily="@font/circe_regular"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:contentDescription="@string/img_des"
+            android:id="@+id/rec_point"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/record_on_circle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:contentDescription="@string/img_des"
+            android:text="@string/live_broadcast"
+            android:fontFamily="@font/circe_regular"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/rec_point" />
+
+        <ImageView
+            android:contentDescription="@string/img_des"
+            android:id="@+id/size_change_button"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/change_video_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="12dp"
+            android:fontFamily="@font/circe_regular"
+            android:textColor="@color/network_color"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="23dp"
+            android:background="@drawable/white_back_rounded_corner"
+            android:text="@string/open_door"
+            android:textAllCaps="false"
+            android:drawableTop="@drawable/key"
+            app:layout_constraintBottom_toTopOf="@+id/settings"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <LinearLayout
+            android:id="@+id/settings"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:paddingTop="14dp"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:contentDescription="@string/img_des"
+                android:layout_width="40dp"
+                android:layout_height="10dp"
+                android:src="@drawable/top_arrow"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/settings_color"
+                android:textSize="17sp"
+                android:text="@string/settings"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:contentDescription="@string/img_des"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/back"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <ImageView
+            android:contentDescription="@string/img_des"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/black_screen"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

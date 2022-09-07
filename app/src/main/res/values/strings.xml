@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Doors Opener</string>
+    <string name="tab_text_1">Камеры</string>
+    <string name="tab_text_2">Двери</string>
+    <string name="my_home">Мой дом</string>
+    <string name="room_name">Название комнаты</string>
+    <string name="cam_num">Камера №X</string>
+    <string name="door_name">Дверь</string>
+    <string name="img_des">Картинка</string>
+    <string name="intercom">Домофон</string>
+    <string name="network">В сети</string>
+    <string name="common_intercom">Домофон общедомовой</string>
+    <string name="settings">Настройки</string>
+    <string name="open_door">Открыть дверь</string>
+    <string name="live_broadcast">Прямая \nтрансляция</string>
+    <string name="visitors">2</string>
+</resources>
