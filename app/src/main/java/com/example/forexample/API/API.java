@@ -1,14 +1,17 @@
 package com.example.forexample.API;
 
 import com.example.forexample.Cameras;
+import com.example.forexample.DataDoors;
 import com.example.forexample.Doors;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface API {
     @GET("api/rubetek/doors")
-    Call<Doors> getDoors();
+    Call<DataDoors> getDoors();
 
     @GET("api/rubetek/cameras")
     Call<Cameras> getCameras();

@@ -12,14 +12,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
+
 public class DoorsRecyclerAdapter extends RecyclerView.Adapter<DoorsRecyclerAdapter.ViewHolder> {
 
     Context context;
-    ArrayList<Doors> arrayList;
+    List<Doors> DataDoors;
 
-    public DoorsRecyclerAdapter(Context context, ArrayList<Doors> arrayList) {
+    public DoorsRecyclerAdapter(Context context, List<Doors> DataDoors) {
         this.context = context;
-        this.arrayList = arrayList;
+        this.DataDoors = DataDoors;
     }
 
     @NonNull
@@ -27,18 +29,12 @@ public class DoorsRecyclerAdapter extends RecyclerView.Adapter<DoorsRecyclerAdap
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.fragment_door, parent, false);
-
-
-
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //Doors doors = arrayList.get(position);
-
-        holder.door_name.setText(arrayList.get(1).getName());
-
+        holder.door_name.setText(DataDoors.get(position).getName());
         holder.door_locker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,7 +45,7 @@ public class DoorsRecyclerAdapter extends RecyclerView.Adapter<DoorsRecyclerAdap
 
     @Override
     public int getItemCount() {
-        return arrayList.size();
+        return DataDoors.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
