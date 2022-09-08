@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.forexample.CamerasFragment;
+import com.example.forexample.DoorListFragment;
 import com.example.forexample.DoorsFragment;
 import com.example.forexample.R;
 
@@ -31,7 +32,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 fragment = new CamerasFragment();
                 break;
             case 1:
-                fragment = new DoorsFragment();
+                fragment = new DoorListFragment();
                 break;
         }
         return fragment;

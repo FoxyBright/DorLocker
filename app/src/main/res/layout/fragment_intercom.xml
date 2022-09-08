@@ -92,6 +92,7 @@
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/open_door_button"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:paddingTop="24dp"
@@ -135,6 +136,7 @@
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/back_button"
             android:contentDescription="@string/img_des"
             android:layout_width="32dp"
             android:layout_height="32dp"
@@ -145,6 +147,7 @@
             app:layout_constraintStart_toStartOf="parent"/>
 
         <ImageView
+            android:id="@+id/crossed_out_eye_button"
             android:contentDescription="@string/img_des"
             android:layout_width="32dp"
             android:layout_height="32dp"
