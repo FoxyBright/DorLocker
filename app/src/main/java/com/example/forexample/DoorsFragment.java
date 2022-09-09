@@ -18,11 +18,7 @@ public class DoorsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentDoorBinding.inflate(inflater, container, false);
-        View view = binding.getRoot();
-
-        final ImageView roundedImageView = binding.roundedImageView;
-        roundedImageView.setClipToOutline(true);
-
-        return view;
+        View root = binding.getRoot();
+        return root;
     }
 }

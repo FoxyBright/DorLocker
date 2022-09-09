@@ -9,7 +9,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +42,29 @@ public class DoorsRecyclerAdapter extends RecyclerView.Adapter<DoorsRecyclerAdap
         holder.door_locker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Клик по замочку
+                Toast.makeText(context, "Дверь " + DataDoors.get(holder.getAdapterPosition()).getName() + " открыта", Toast.LENGTH_SHORT).show();
             }
         });
+
+        holder.cam_video.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: INTERCOM FRAGMENT
+            }
+        });
+
+        if (DataDoors.get(position).getSnapshot() != null) {
+            Glide.with(context).load(DataDoors.get(position).getSnapshot()).diskCacheStrategy(DiskCacheStrategy.NONE).into(holder.roundedImageView);
+            holder.status_bar.setBackgroundResource(R.drawable.white_bottom_rounded_corner);
+            holder.cam_video.setVisibility(View.VISIBLE);
+            holder.status_network.setVisibility(View.VISIBLE);
+            holder.roundedImageView.setClipToOutline(true);
+
+            ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(
+                    ConstraintLayout.LayoutParams.MATCH_PARENT,
+                    ConstraintLayout.LayoutParams.MATCH_PARENT
+            );
+        }
     }
 
     @Override
@@ -54,6 +78,9 @@ public class DoorsRecyclerAdapter extends RecyclerView.Adapter<DoorsRecyclerAdap
         ImageView roundedImageView;
         TextView door_name;
         TextView status_network;
+        ConstraintLayout cam_video;
+        ConstraintLayout status_bar;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -61,6 +88,8 @@ public class DoorsRecyclerAdapter extends RecyclerView.Adapter<DoorsRecyclerAdap
             door_name = itemView.findViewById(R.id.door_name);
             status_network = itemView.findViewById(R.id.status_network);
             door_locker = itemView.findViewById(R.id.door_locker);
+            cam_video = itemView.findViewById(R.id.cam_video);
+            status_bar = itemView.findViewById(R.id.status_bar);
         }
     }
 }

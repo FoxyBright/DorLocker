@@ -1,6 +1,7 @@
 package com.example.forexample.API;
 
 import com.example.forexample.Cameras;
+import com.example.forexample.CamerasData;
 import com.example.forexample.DataDoors;
 import com.example.forexample.Doors;
 
@@ -14,5 +15,5 @@ public interface API {
     Call<DataDoors> getDoors();
 
     @GET("api/rubetek/cameras")
-    Call<Cameras> getCameras();
+    Call<CamerasData> getCameras();
 }
