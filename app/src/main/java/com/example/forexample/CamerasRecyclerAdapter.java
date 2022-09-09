@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -66,6 +67,7 @@ public class CamerasRecyclerAdapter extends RecyclerView.Adapter<CamerasRecycler
         ImageView star;
         ImageView rec;
         ImageView roundedImageView;
+        LinearLayout cam_linear_layout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -75,6 +77,7 @@ public class CamerasRecyclerAdapter extends RecyclerView.Adapter<CamerasRecycler
             roundedImageView = itemView.findViewById(R.id.roundedImageView);
             cam_num = itemView.findViewById(R.id.cam_num);
             room_name = itemView.findViewById(R.id.room_name);
+            cam_linear_layout = itemView.findViewById(R.id.cam_linear_layout);
         }
     }
 }

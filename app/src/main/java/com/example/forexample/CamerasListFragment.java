@@ -50,15 +50,6 @@ public class CamerasListFragment extends Fragment {
             }
         });
 
-
-
-
-
-
-
-
-
-
         return view;
     }
 }
