@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -25,10 +27,6 @@ public class DoorsRecyclerAdapter extends RecyclerView.Adapter<DoorsRecyclerAdap
 
     Context context;
     List<Doors> DataDoors;
-    float x;
-    float y;
-    float sDown;
-    float sMove;
 
     @SuppressLint("NotifyDataSetChanged")
     public DoorsRecyclerAdapter(Context context, List<Doors> DataDoors) {
@@ -55,7 +53,7 @@ public class DoorsRecyclerAdapter extends RecyclerView.Adapter<DoorsRecyclerAdap
         });
 
         holder.cam_video.setOnClickListener(v -> {
-            //TODO: INTERCOM FRAGMENT
+
         });
 
         if (DataDoors.get(position).getSnapshot() != null) {
@@ -65,38 +63,20 @@ public class DoorsRecyclerAdapter extends RecyclerView.Adapter<DoorsRecyclerAdap
             holder.status_network.setVisibility(View.VISIBLE);
             holder.roundedImageView.setClipToOutline(true);
         }
-
-        holder.door_layout.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                x = event.getX();
-                y = event.getY();
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN: // нажатие
-                        sDown = x;
-                        break;
-                    case MotionEvent.ACTION_MOVE: // движение
-                        sMove = x;
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        break;
-                    case MotionEvent.ACTION_CANCEL:
-                        break;
-                }
-
-                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                        RelativeLayout.LayoutParams.MATCH_PARENT,
-                        RelativeLayout.LayoutParams.WRAP_CONTENT);
-
-                if (sDown > sMove) {
-                    holder.door_name.setText("Влево");
-//                    params.setMargins(-150, 0, 150, 0);
-//                    holder.door_layout.setLayoutParams(params);
-                } else
-                    holder.door_name.setText("Вправо");
-                return true;
-            }
-        });
+//        holder.door_layout.setOnTouchListener(new OnSwipeTouchListener(context) {
+//            public void onSwipeRight() {
+//                holder.door_name.setText("Вправо");
+//                RecyclerView.MarginLayoutParams marginLayoutParams = new RecyclerView.MarginLayoutParams(holder.door_layout.getLayoutParams());
+//                marginLayoutParams.setMargins(0, 0, 0, 0);
+//                holder.door_layout.setLayoutParams(marginLayoutParams);
+//            }
+//            public void onSwipeLeft() {
+//                holder.door_name.setText("Влево");
+//                RecyclerView.MarginLayoutParams marginLayoutParams = new RecyclerView.MarginLayoutParams(holder.door_layout.getLayoutParams());
+//                marginLayoutParams.setMargins(-150, 0, 150, 0);
+//                holder.door_layout.setLayoutParams(marginLayoutParams);
+//            }
+//        });
     }
 
     @Override

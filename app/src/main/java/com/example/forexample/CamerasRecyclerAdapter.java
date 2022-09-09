@@ -40,7 +40,7 @@ public class CamerasRecyclerAdapter extends RecyclerView.Adapter<CamerasRecycler
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+        holder.roundedImageView.setClipToOutline(true);
         holder.cam_num.setText(CamerasData.get(position).getName());
         Glide.with(context).load(CamerasData.get(position).getSnapshot())
                 .diskCacheStrategy(DiskCacheStrategy.NONE)

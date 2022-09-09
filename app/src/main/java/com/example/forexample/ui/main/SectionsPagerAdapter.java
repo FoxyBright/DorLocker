@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.forexample.CamerasFragment;
 import com.example.forexample.CamerasListFragment;
 import com.example.forexample.DoorListFragment;
 import com.example.forexample.R;
