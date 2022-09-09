@@ -41,7 +41,10 @@ public class CamerasRecyclerAdapter extends RecyclerView.Adapter<CamerasRecycler
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         holder.cam_num.setText(CamerasData.get(position).getName());
-        Glide.with(context).load(CamerasData.get(position).getSnapshot()).diskCacheStrategy(DiskCacheStrategy.NONE).into(holder.roundedImageView);
+        Glide.with(context).load(CamerasData.get(position).getSnapshot())
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .into(holder.roundedImageView);
+        holder.room_name.setText(CamerasData.get(position).getRoom());
         if (CamerasData.get(position).getRec()) {
             holder.rec.setVisibility(View.VISIBLE);
         }

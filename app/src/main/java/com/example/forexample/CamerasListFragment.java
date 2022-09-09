@@ -5,6 +5,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +21,7 @@ public class CamerasListFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private List<Cameras> CamerasData;
-    private List<String> RoomsData;
+    private List<String> RoomsList;
     public CamerasRecyclerAdapter CamerasRecyclerAdapter;
 
     @Override
@@ -28,7 +30,7 @@ public class CamerasListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_cameras_list, container, false);
         recyclerView = view.findViewById(R.id.recicler);
         CamerasData = new CamerasData().getCameras();
-        RoomsData = new CamerasData().getRoom();
+        RoomsList = new CamerasData().getRoom();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         SingletonRetrofitObject api = SingletonRetrofitObject.getInstance();
         Call<JSONCamerasData> getCamerasCall = api.getJSONApi().getCameras();
@@ -37,8 +39,8 @@ public class CamerasListFragment extends Fragment {
             public void onResponse(@NonNull Call<JSONCamerasData> call, @NonNull Response<JSONCamerasData> response) {
                 assert response.body() != null;
                 CamerasData = response.body().getCamerasData().getCameras();
-                RoomsData = response.body().getCamerasData().getRoom();
-                CamerasRecyclerAdapter = new CamerasRecyclerAdapter(getActivity(), CamerasData, RoomsData);
+                RoomsList = response.body().getCamerasData().getRoom();
+                CamerasRecyclerAdapter = new CamerasRecyclerAdapter(getActivity(), CamerasData, RoomsList);
                 recyclerView.setAdapter(CamerasRecyclerAdapter);
             }
 
