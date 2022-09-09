@@ -23,6 +23,7 @@ public class DoorListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_door_list, container, false);
         recyclerView = view.findViewById(R.id.recicler);
         DoorsArray = new DataDoors().getDataDoors();
@@ -40,7 +41,7 @@ public class DoorListFragment extends Fragment {
 
             @Override
             public void onFailure(@NonNull Call<DataDoors> call, @NonNull Throwable t) {
-                Toast.makeText(getActivity(), "Ошибка получения данных", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Ошибка получения данных от дверей", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -1,21 +1,32 @@
 package com.example.forexample;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
+import java.util.List;
 
 public class CamerasRecyclerAdapter extends RecyclerView.Adapter<CamerasRecyclerAdapter.ViewHolder> {
 
-    ArrayList<Cameras> arrayList = new ArrayList<>();
-    public CamerasRecyclerAdapter(ArrayList<Cameras> arrayList){
-        this.arrayList = arrayList;
+    Context context;
+    List<Cameras> CamerasData;
+    List<String> RoomsData;
+
+    @SuppressLint("NotifyDataSetChanged")
+    public CamerasRecyclerAdapter(Context context, List<Cameras> CamerasData, List<String> RoomsData) {
+        this.context = context;
+        this.CamerasData = CamerasData;
+        this.RoomsData = RoomsData;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -23,35 +34,44 @@ public class CamerasRecyclerAdapter extends RecyclerView.Adapter<CamerasRecycler
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.fragment_cameras, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Cameras cameras = arrayList.get(position);
-//        holder.title.setText(doors.getTitle());
-//        holder.text.setText(doors.getText());
-//        holder.img.setImageResource(doors.getImg());
+
+        holder.cam_num.setText(CamerasData.get(position).getName());
+        Glide.with(context).load(CamerasData.get(position).getSnapshot()).diskCacheStrategy(DiskCacheStrategy.NONE).into(holder.roundedImageView);
+        if (CamerasData.get(position).getRec()) {
+            holder.rec.setVisibility(View.VISIBLE);
+        }
+        if (CamerasData.get(position).getFavorites()) {
+            holder.star.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return arrayList.size();
+        return CamerasData.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView title;
-        TextView text;
-        ImageView img;
+        TextView room_name;
+        TextView cam_num;
+        ImageView play_button;
+        ImageView star;
+        ImageView rec;
+        ImageView roundedImageView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
-//            title = itemView.findViewById(R.id.title);
-//            text = itemView.findViewById(R.id.text);
-//            img = itemView.findViewById(R.id.image);
+            rec = itemView.findViewById(R.id.rec);
+            star = itemView.findViewById(R.id.star);
+            play_button = itemView.findViewById(R.id.play_button);
+            roundedImageView = itemView.findViewById(R.id.roundedImageView);
+            cam_num = itemView.findViewById(R.id.cam_num);
+            room_name = itemView.findViewById(R.id.room_name);
         }
     }
 }

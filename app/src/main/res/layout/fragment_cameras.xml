@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingStart="21dp"
     android:paddingEnd="21dp"
@@ -39,6 +39,8 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:visibility="invisible"
+            android:id="@+id/rec"
             android:contentDescription="@string/img_des"
             android:layout_width="24dp"
             android:layout_height="24dp"
@@ -48,6 +50,8 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:visibility="invisible"
+            android:id="@+id/star"
             android:contentDescription="@string/img_des"
             android:layout_width="24dp"
             android:layout_height="24dp"
@@ -57,6 +61,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:id="@+id/play_button"
             android:contentDescription="@string/img_des"
             android:layout_width="60dp"
             android:layout_height="60dp"

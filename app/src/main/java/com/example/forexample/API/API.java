@@ -4,6 +4,7 @@ import com.example.forexample.Cameras;
 import com.example.forexample.CamerasData;
 import com.example.forexample.DataDoors;
 import com.example.forexample.Doors;
+import com.example.forexample.JSONCamerasData;
 
 import java.util.List;
 
@@ -15,5 +16,5 @@ public interface API {
     Call<DataDoors> getDoors();
 
     @GET("api/rubetek/cameras")
-    Call<CamerasData> getCameras();
+    Call<JSONCamerasData> getCameras();
 }

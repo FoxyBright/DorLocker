@@ -1,5 +1,6 @@
 package com.example.forexample;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,15 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class DoorsRecyclerAdapter extends RecyclerView.Adapter<DoorsRecyclerAdapter.ViewHolder> {
@@ -23,9 +20,11 @@ public class DoorsRecyclerAdapter extends RecyclerView.Adapter<DoorsRecyclerAdap
     Context context;
     List<Doors> DataDoors;
 
+    @SuppressLint("NotifyDataSetChanged")
     public DoorsRecyclerAdapter(Context context, List<Doors> DataDoors) {
         this.context = context;
         this.DataDoors = DataDoors;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -39,18 +38,14 @@ public class DoorsRecyclerAdapter extends RecyclerView.Adapter<DoorsRecyclerAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.door_name.setText(DataDoors.get(position).getName());
-        holder.door_locker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+
+        holder.door_locker.setOnClickListener(v -> {
+                //TODO: Клик замочка открытия двери
                 Toast.makeText(context, "Дверь " + DataDoors.get(holder.getAdapterPosition()).getName() + " открыта", Toast.LENGTH_SHORT).show();
-            }
         });
 
-        holder.cam_video.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO: INTERCOM FRAGMENT
-            }
+        holder.cam_video.setOnClickListener(v -> {
+            //TODO: INTERCOM FRAGMENT
         });
 
         if (DataDoors.get(position).getSnapshot() != null) {
@@ -59,11 +54,6 @@ public class DoorsRecyclerAdapter extends RecyclerView.Adapter<DoorsRecyclerAdap
             holder.cam_video.setVisibility(View.VISIBLE);
             holder.status_network.setVisibility(View.VISIBLE);
             holder.roundedImageView.setClipToOutline(true);
-
-            ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(
-                    ConstraintLayout.LayoutParams.MATCH_PARENT,
-                    ConstraintLayout.LayoutParams.MATCH_PARENT
-            );
         }
     }
 
@@ -80,7 +70,6 @@ public class DoorsRecyclerAdapter extends RecyclerView.Adapter<DoorsRecyclerAdap
         TextView status_network;
         ConstraintLayout cam_video;
         ConstraintLayout status_bar;
-
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
