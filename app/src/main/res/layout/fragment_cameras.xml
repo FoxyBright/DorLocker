@@ -11,6 +11,7 @@
     android:background="@color/app_background">
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/room_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,6 +25,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="270dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/white_back_rounded_corner">
 
         <ImageView

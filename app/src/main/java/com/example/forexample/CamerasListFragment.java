@@ -1,10 +1,12 @@
 package com.example.forexample;
 
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +16,9 @@ import com.example.forexample.DataClasses.Cameras;
 import com.example.forexample.DataClasses.CamerasData;
 import com.example.forexample.DataClasses.JSONCamerasData;
 import com.example.forexample.API.SingletonRetrofitObject;
+
 import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,6 +29,11 @@ public class CamerasListFragment extends Fragment {
     private List<Cameras> CamerasData;
     private List<String> RoomsList;
     public CamerasRecyclerAdapter CamerasRecyclerAdapter;
+
+    private List<Cameras> sort(List<Cameras> cam){
+        cam.removeIf(cameras -> !cameras.getRoom().equals("Вне комнат"));
+        return cam;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,7 +50,15 @@ public class CamerasListFragment extends Fragment {
             public void onResponse(@NonNull Call<JSONCamerasData> call, @NonNull Response<JSONCamerasData> response) {
                 assert response.body() != null;
                 CamerasData = response.body().getCamerasData().getCameras();
+                for(Cameras cameras : CamerasData)
+                    if(cameras.getRoom() == null)
+                        cameras.setRoom("Вне комнат");
                 RoomsList = response.body().getCamerasData().getRoom();
+                RoomsList.add("Вне комнат");
+
+
+
+
                 CamerasRecyclerAdapter = new CamerasRecyclerAdapter(getActivity(), CamerasData, RoomsList);
                 recyclerView.setAdapter(CamerasRecyclerAdapter);
             }
