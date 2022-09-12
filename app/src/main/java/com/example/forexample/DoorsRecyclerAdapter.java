@@ -62,21 +62,8 @@ public class DoorsRecyclerAdapter extends RecyclerView.Adapter<DoorsRecyclerAdap
             holder.cam_video.setVisibility(View.VISIBLE);
             holder.status_network.setVisibility(View.VISIBLE);
             holder.roundedImageView.setClipToOutline(true);
+            holder.view.setVisibility(View.VISIBLE);
         }
-//        holder.door_layout.setOnTouchListener(new OnSwipeTouchListener(context) {
-//            public void onSwipeRight() {
-//                holder.door_name.setText("Вправо");
-//                RecyclerView.MarginLayoutParams marginLayoutParams = new RecyclerView.MarginLayoutParams(holder.door_layout.getLayoutParams());
-//                marginLayoutParams.setMargins(0, 0, 0, 0);
-//                holder.door_layout.setLayoutParams(marginLayoutParams);
-//            }
-//            public void onSwipeLeft() {
-//                holder.door_name.setText("Влево");
-//                RecyclerView.MarginLayoutParams marginLayoutParams = new RecyclerView.MarginLayoutParams(holder.door_layout.getLayoutParams());
-//                marginLayoutParams.setMargins(-150, 0, 150, 0);
-//                holder.door_layout.setLayoutParams(marginLayoutParams);
-//            }
-//        });
     }
 
     @Override
@@ -93,6 +80,7 @@ public class DoorsRecyclerAdapter extends RecyclerView.Adapter<DoorsRecyclerAdap
         ConstraintLayout cam_video;
         ConstraintLayout status_bar;
         RelativeLayout door_layout;
+        View view;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -103,6 +91,7 @@ public class DoorsRecyclerAdapter extends RecyclerView.Adapter<DoorsRecyclerAdap
             cam_video = itemView.findViewById(R.id.cam_video);
             status_bar = itemView.findViewById(R.id.status_bar);
             door_layout = itemView.findViewById(R.id.door_layout);
+            view = itemView.findViewById(R.id.view);
         }
     }
 }
