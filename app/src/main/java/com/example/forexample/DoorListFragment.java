@@ -9,6 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import com.example.forexample.DataClasses.DataDoors;
+import com.example.forexample.DataClasses.Doors;
 import com.example.forexample.API.SingletonRetrofitObject;
 import java.util.List;
 import retrofit2.Call;

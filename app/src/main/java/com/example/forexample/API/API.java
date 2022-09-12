@@ -1,12 +1,7 @@
 package com.example.forexample.API;
 
-import com.example.forexample.Cameras;
-import com.example.forexample.CamerasData;
-import com.example.forexample.DataDoors;
-import com.example.forexample.Doors;
-import com.example.forexample.JSONCamerasData;
-
-import java.util.List;
+import com.example.forexample.DataClasses.DataDoors;
+import com.example.forexample.DataClasses.JSONCamerasData;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

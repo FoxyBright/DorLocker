@@ -1,25 +1,28 @@
-package com.example.forexample;
+package com.example.forexample.DataClasses;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Doors {
+public class Cameras {
 
     @SerializedName("name")
     @Expose
     private String name;
+    @SerializedName("snapshot")
+    @Expose
+    private String snapshot;
     @SerializedName("room")
     @Expose
     private String room;
     @SerializedName("id")
     @Expose
-    private int id;
+    private Integer id;
     @SerializedName("favorites")
     @Expose
-    private boolean favorites;
-    @SerializedName("snapshot")
+    private Boolean favorites;
+    @SerializedName("rec")
     @Expose
-    private String snapshot;
+    private Boolean rec;
 
     public String getName() {
         return name;
@@ -27,6 +30,14 @@ public class Doors {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSnapshot() {
+        return snapshot;
+    }
+
+    public void setSnapshot(String snapshot) {
+        this.snapshot = snapshot;
     }
 
     public String getRoom() {
@@ -37,28 +48,28 @@ public class Doors {
         this.room = room;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public boolean isFavorites() {
+    public Boolean getFavorites() {
         return favorites;
     }
 
-    public void setFavorites(boolean favorites) {
+    public void setFavorites(Boolean favorites) {
         this.favorites = favorites;
     }
 
-    public String getSnapshot() {
-        return snapshot;
+    public Boolean getRec() {
+        return rec;
     }
 
-    public void setSnapshot(String snapshot) {
-        this.snapshot = snapshot;
+    public void setRec(Boolean rec) {
+        this.rec = rec;
     }
 
 }

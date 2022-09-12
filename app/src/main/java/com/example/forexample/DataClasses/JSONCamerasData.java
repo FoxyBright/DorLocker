@@ -1,4 +1,4 @@
-package com.example.forexample;
+package com.example.forexample.DataClasses;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

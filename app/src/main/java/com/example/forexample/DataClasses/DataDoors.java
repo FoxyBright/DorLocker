@@ -1,4 +1,4 @@
-package com.example.forexample;
+package com.example.forexample.DataClasses;
 
 import java.util.List;
 

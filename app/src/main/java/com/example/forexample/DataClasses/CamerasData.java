@@ -1,24 +1,24 @@
-package com.example.forexample;
+package com.example.forexample.DataClasses;
 
 import java.util.List;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class RoomsData {
+public class CamerasData {
 
     @SerializedName("room")
     @Expose
-    private String room;
+    private List<String> room = null;
     @SerializedName("cameras")
     @Expose
     private List<Cameras> cameras = null;
 
-    public String getRoom() {
+    public List<String> getRoom() {
         return room;
     }
 
-    public void setRoom(String room) {
+    public void setRoom(List<String> room) {
         this.room = room;
     }
 
@@ -29,4 +29,5 @@ public class RoomsData {
     public void setCameras(List<Cameras> cameras) {
         this.cameras = cameras;
     }
+
 }

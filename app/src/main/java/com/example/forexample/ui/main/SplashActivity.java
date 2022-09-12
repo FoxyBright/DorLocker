@@ -1,14 +1,13 @@
-package com.example.forexample;
+package com.example.forexample.ui.main;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+
+import com.example.forexample.MainActivity;
+import com.example.forexample.R;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashActivity extends AppCompatActivity {
@@ -24,13 +23,10 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void initFunctionality() {
-        layout.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        layout.postDelayed(() -> {
+            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         }, 2500);
     }
 }
