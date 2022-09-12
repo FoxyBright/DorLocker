@@ -1,3 +1,7 @@
 Приложение для открытия дверей и домофонов
 
-![KDQtkquZ7yU](https://user-images.githubusercontent.com/75783159/189631467-9f9e8a19-fd64-4638-9747-b83caf64d6ad.jpg)
+
+![YyK6n9ejOME](https://user-images.githubusercontent.com/75783159/189676322-fd9ff18a-3b97-40d7-9c70-de10bb0660f8.jpg)
+
+
+
