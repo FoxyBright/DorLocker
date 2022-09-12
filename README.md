@@ -1,9 +1,7 @@
-Приложение для открытия дверей и домофонов
+Приложение для контроля камер, открытия дверей и домофонов
 
+![YyK6n9ejOME](https://user-images.githubusercontent.com/75783159/189677130-04d10cbb-b3ed-4afa-86ef-3c277f552f13.jpg)
 
-![YyK6n9ejOME](https://user-images.githubusercontent.com/75783159/189676322-fd9ff18a-3b97-40d7-9c70-de10bb0660f8.jpg)
-![Nb98HaTUs9I](https://user-images.githubusercontent.com/75783159/189676688-7452bfa9-cdcb-49fb-8bab-23c2e86fc3da.jpg)
-![KDQtkquZ7yU](https://user-images.githubusercontent.com/75783159/189676779-9ed5a27d-6c5d-46c9-87a0-db5016cdcadb.jpg)
+![Nb98HaTUs9I](https://user-images.githubusercontent.com/75783159/189677136-ee20c0bf-261c-4a2d-8b21-15c18c82bcea.jpg)
 
-
-
+![KDQtkquZ7yU](https://user-images.githubusercontent.com/75783159/189677138-cc724abf-3c8c-42b3-b699-3513fc83387b.jpg)
