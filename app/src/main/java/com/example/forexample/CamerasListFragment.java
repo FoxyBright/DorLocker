@@ -57,19 +57,21 @@ public class CamerasListFragment extends Fragment {
                         cameras.setRoom("Вне комнат");
                 RoomsList = response.body().getCamerasData().getRoom();
                 RoomsList.add("Вне комнат");
+                try {
+                    MySwipeHelper mySwipeHelper = new MySwipeHelper(getActivity(), recyclerView, 150) {
+                        @Override
+                        protected void instantiateMyButton(RecyclerView.ViewHolder viewHolder, List<MyButton> buffer) {
 
-                MySwipeHelper mySwipeHelper = new MySwipeHelper(getActivity(), recyclerView, 150) {
-                    @Override
-                    protected void instantiateMyButton(RecyclerView.ViewHolder viewHolder, List<MyButton> buffer) {
-
-                        buffer.add(new MyButton(getActivity(),
-                                "",
-                                45,
-                                R.drawable.favorite_disactivate,
-                                Color.parseColor("#F6F6F6"),
-                                pos -> Toast.makeText(getActivity(), "Favorite " + CamerasData.get(pos).getName(), Toast.LENGTH_SHORT).show()));
-                    }
-                };
+                            buffer.add(new MyButton(getActivity(),
+                                    "",
+                                    45,
+                                    R.drawable.favorite_disactivate,
+                                    Color.parseColor("#F6F6F6"),
+                                    pos -> Toast.makeText(getActivity(), "Favorite " + CamerasData.get(pos).getName(), Toast.LENGTH_SHORT).show()));
+                        }
+                    };
+                } catch (Exception ignored) {
+                }
                 CamerasRecyclerAdapter = new CamerasRecyclerAdapter(getActivity(), CamerasData, RoomsList);
                 recyclerView.setAdapter(CamerasRecyclerAdapter);
             }

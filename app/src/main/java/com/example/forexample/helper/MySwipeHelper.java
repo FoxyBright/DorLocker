@@ -60,22 +60,26 @@ public abstract class MySwipeHelper extends ItemTouchHelper.SimpleCallback {
             if (swipePosition < 0) return false;
             Point point = new Point((int) motionEvent.getRawX(), (int) motionEvent.getRawY());
 
-            RecyclerView.ViewHolder swipeViewHolder = recyclerView.findViewHolderForAdapterPosition(swipePosition);
-            View swipedItem = Objects.requireNonNull(swipeViewHolder).itemView;
-            Rect rect = new Rect();
-            swipedItem.getGlobalVisibleRect(rect);
+            try {
+                RecyclerView.ViewHolder swipeViewHolder = recyclerView.findViewHolderForAdapterPosition(swipePosition);
+                View swipedItem = Objects.requireNonNull(swipeViewHolder).itemView;
+                Rect rect = new Rect();
+                swipedItem.getGlobalVisibleRect(rect);
 
-            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN ||
-                    motionEvent.getAction() == MotionEvent.ACTION_UP ||
-                    motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
-                if (rect.top < point.y && rect.bottom > point.y)
-                    gestureDetector.onTouchEvent(motionEvent);
-                else {
-                    removeQueue.add(swipePosition);
-                    swipePosition = -1;
-                    recoverSwipedItem();
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN ||
+                        motionEvent.getAction() == MotionEvent.ACTION_UP ||
+                        motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
+                    if (rect.top < point.y && rect.bottom > point.y)
+                        gestureDetector.onTouchEvent(motionEvent);
+                    else {
+                        removeQueue.add(swipePosition);
+                        swipePosition = -1;
+                        recoverSwipedItem();
+                    }
+
                 }
 
+            } catch (Exception ignored) {
             }
             return false;
         }
