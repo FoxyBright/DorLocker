@@ -39,7 +39,7 @@ public class CamerasListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_cameras_list, container, false);
-        recyclerView = view.findViewById(R.id.recicler);
+        recyclerView = view.findViewById(R.id.recycler);
         CamerasData = new CamerasData().getCameras();
         RoomsList = new CamerasData().getRoom();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
