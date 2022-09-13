@@ -108,30 +108,32 @@
             app:layout_constraintBottom_toTopOf="@+id/settings"
             app:layout_constraintStart_toStartOf="parent"/>
 
+        <include layout="@layout/pager_item"/>
+
         <LinearLayout
             android:id="@+id/settings"
             android:layout_width="match_parent"
             android:layout_height="75dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:orientation="vertical"
             android:background="@color/white"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
             android:paddingTop="14dp"
-            android:gravity="center_horizontal">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <ImageView
-                android:contentDescription="@string/img_des"
                 android:layout_width="40dp"
                 android:layout_height="10dp"
-                android:src="@drawable/top_arrow"/>
+                android:contentDescription="@string/img_des"
+                android:src="@drawable/top_arrow" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
+                android:text="@string/settings"
                 android:textColor="@color/settings_color"
-                android:textSize="17sp"
-                android:text="@string/settings"/>
+                android:textSize="17sp" />
 
         </LinearLayout>
 

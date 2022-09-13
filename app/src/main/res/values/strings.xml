@@ -7,6 +7,7 @@
     <string name="cam_num">Камера №X</string>
     <string name="door_name">Дверь</string>
     <string name="img_des">Картинка</string>
+    <string name="settings_des">Настройки приложения \n (Ждите в следующем обновлении)</string>
     <string name="intercom">Домофон</string>
     <string name="network">В сети</string>
     <string name="common_intercom">Домофон общедомовой</string>

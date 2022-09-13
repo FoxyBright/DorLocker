@@ -43,26 +43,27 @@ public class DoorListFragment extends Fragment {
             public void onResponse(@NonNull Call<DataDoors> call, @NonNull Response<DataDoors> response) {
                 assert response.body() != null;
                 DoorsArray = response.body().getDataDoors();
+                try {
+                    MySwipeHelper mySwipeHelper = new MySwipeHelper(getActivity(), recycler, 200) {
+                        @Override
+                        protected void instantiateMyButton(RecyclerView.ViewHolder viewHolder, List<MyButton> buffer) {
 
-                MySwipeHelper mySwipeHelper = new MySwipeHelper(getActivity(), recycler, 150) {
-                    @Override
-                    protected void instantiateMyButton(RecyclerView.ViewHolder viewHolder, List<MyButton> buffer) {
-
-                        buffer.add(new MyButton(getActivity(),
-                                "",
-                                45,
-                                R.drawable.favorite_disactivate,
-                                Color.parseColor("#F6F6F6"),
-                                pos -> Toast.makeText(getActivity(), "Favorite " + pos, Toast.LENGTH_SHORT).show()));
-                        buffer.add(new MyButton(getActivity(),
-                                "",
-                                45,
-                                R.drawable.edit,
-                                Color.parseColor("#F6F6F6"),
-                                pos -> Toast.makeText(getActivity(), "Edit " + pos, Toast.LENGTH_SHORT).show()));
-                    }
-                };
-
+                            buffer.add(new MyButton(getActivity(),
+                                    "",
+                                    45,
+                                    R.drawable.favorite_disactivate,
+                                    Color.parseColor("#F6F6F6"),
+                                    pos -> Toast.makeText(getActivity(), "Favorite " + DoorsArray.get(pos).getName(), Toast.LENGTH_SHORT).show()));
+                            buffer.add(new MyButton(getActivity(),
+                                    "",
+                                    45,
+                                    R.drawable.edit,
+                                    Color.parseColor("#F6F6F6"),
+                                    pos -> Toast.makeText(getActivity(), "Edit " + DoorsArray.get(pos).getName(), Toast.LENGTH_SHORT).show()));
+                        }
+                    };
+                } catch (Exception ignored) {
+                }
                 DoorsRecyclerAdapter doorsRecyclerAdapter = new DoorsRecyclerAdapter(getActivity(), DoorsArray);
                 recycler.setAdapter(doorsRecyclerAdapter);
             }

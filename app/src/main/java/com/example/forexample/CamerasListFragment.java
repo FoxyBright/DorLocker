@@ -1,5 +1,6 @@
 package com.example.forexample;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import com.example.forexample.DataClasses.Cameras;
 import com.example.forexample.DataClasses.CamerasData;
 import com.example.forexample.DataClasses.JSONCamerasData;
 import com.example.forexample.API.SingletonRetrofitObject;
+import com.example.forexample.helper.MySwipeHelper;
 
 import java.util.List;
 
@@ -30,7 +32,7 @@ public class CamerasListFragment extends Fragment {
     private List<String> RoomsList;
     public CamerasRecyclerAdapter CamerasRecyclerAdapter;
 
-    private List<Cameras> sort(List<Cameras> cam){
+    private List<Cameras> sort(List<Cameras> cam) {
         cam.removeIf(cameras -> !cameras.getRoom().equals("Вне комнат"));
         return cam;
     }
@@ -50,15 +52,24 @@ public class CamerasListFragment extends Fragment {
             public void onResponse(@NonNull Call<JSONCamerasData> call, @NonNull Response<JSONCamerasData> response) {
                 assert response.body() != null;
                 CamerasData = response.body().getCamerasData().getCameras();
-                for(Cameras cameras : CamerasData)
-                    if(cameras.getRoom() == null)
+                for (Cameras cameras : CamerasData)
+                    if (cameras.getRoom() == null)
                         cameras.setRoom("Вне комнат");
                 RoomsList = response.body().getCamerasData().getRoom();
                 RoomsList.add("Вне комнат");
 
+                MySwipeHelper mySwipeHelper = new MySwipeHelper(getActivity(), recyclerView, 150) {
+                    @Override
+                    protected void instantiateMyButton(RecyclerView.ViewHolder viewHolder, List<MyButton> buffer) {
 
-
-
+                        buffer.add(new MyButton(getActivity(),
+                                "",
+                                45,
+                                R.drawable.favorite_disactivate,
+                                Color.parseColor("#F6F6F6"),
+                                pos -> Toast.makeText(getActivity(), "Favorite " + CamerasData.get(pos).getName(), Toast.LENGTH_SHORT).show()));
+                    }
+                };
                 CamerasRecyclerAdapter = new CamerasRecyclerAdapter(getActivity(), CamerasData, RoomsList);
                 recyclerView.setAdapter(CamerasRecyclerAdapter);
             }
