@@ -13,11 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.forexample.DataClasses.Cameras;
-import com.example.forexample.DataClasses.CamerasData;
-import com.example.forexample.DataClasses.JSONCamerasData;
-import com.example.forexample.API.SingletonRetrofitObject;
-import com.example.forexample.helper.MySwipeHelper;
+import com.example.forexample.Classes.Camera;
+import com.example.forexample.Services.Responces.CamerasResponse;
+import com.example.forexample.Services.Retrofit.mRetrofit;
+import com.example.forexample.ui.main.RecyclerSwiper;
 
 import java.util.List;
 
@@ -28,37 +27,23 @@ import retrofit2.Response;
 public class CamerasListFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private List<Cameras> CamerasData;
-    private List<String> RoomsList;
+    private List<Camera> cameraData;
     public CamerasRecyclerAdapter CamerasRecyclerAdapter;
-
-    private List<Cameras> sort(List<Cameras> cam) {
-        cam.removeIf(cameras -> !cameras.getRoom().equals("Вне комнат"));
-        return cam;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_cameras_list, container, false);
         recyclerView = view.findViewById(R.id.recycler);
-        CamerasData = new CamerasData().getCameras();
-        RoomsList = new CamerasData().getRoom();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        SingletonRetrofitObject api = SingletonRetrofitObject.getInstance();
-        Call<JSONCamerasData> getCamerasCall = api.getJSONApi().getCameras();
-        getCamerasCall.enqueue(new Callback<JSONCamerasData>() {
+        Call<CamerasResponse> getCamerasCall = mRetrofit.getInstance().getAPI().getCameras();
+        getCamerasCall.enqueue(new Callback<CamerasResponse>() {
             @Override
-            public void onResponse(@NonNull Call<JSONCamerasData> call, @NonNull Response<JSONCamerasData> response) {
+            public void onResponse(@NonNull Call<CamerasResponse> call, @NonNull Response<CamerasResponse> response) {
                 assert response.body() != null;
-                CamerasData = response.body().getCamerasData().getCameras();
-                for (Cameras cameras : CamerasData)
-                    if (cameras.getRoom() == null)
-                        cameras.setRoom("Вне комнат");
-                RoomsList = response.body().getCamerasData().getRoom();
-                RoomsList.add("Вне комнат");
+                cameraData = response.body().getCameras();
                 try {
-                    MySwipeHelper mySwipeHelper = new MySwipeHelper(getActivity(), recyclerView, 150) {
+                    RecyclerSwiper mySwipeHelper = new RecyclerSwiper(getActivity(), recyclerView, 150) {
                         @Override
                         protected void instantiateMyButton(RecyclerView.ViewHolder viewHolder, List<MyButton> buffer) {
 
@@ -67,17 +52,17 @@ public class CamerasListFragment extends Fragment {
                                     45,
                                     R.drawable.favorite_disactivate,
                                     Color.parseColor("#F6F6F6"),
-                                    pos -> Toast.makeText(getActivity(), "Favorite " + CamerasData.get(pos).getName(), Toast.LENGTH_SHORT).show()));
+                                    pos -> Toast.makeText(getActivity(), "Favorite " + cameraData.get(pos).getName(), Toast.LENGTH_SHORT).show()));
                         }
                     };
                 } catch (Exception ignored) {
                 }
-                CamerasRecyclerAdapter = new CamerasRecyclerAdapter(getActivity(), CamerasData, RoomsList);
+                CamerasRecyclerAdapter = new CamerasRecyclerAdapter(getActivity(), cameraData);
                 recyclerView.setAdapter(CamerasRecyclerAdapter);
             }
 
             @Override
-            public void onFailure(@NonNull Call<JSONCamerasData> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<CamerasResponse> call, @NonNull Throwable t) {
                 Toast.makeText(getActivity(), "Ошибка получения данных c камер", Toast.LENGTH_SHORT).show();
             }
         });

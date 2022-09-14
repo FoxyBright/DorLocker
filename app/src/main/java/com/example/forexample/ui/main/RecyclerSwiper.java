@@ -1,10 +1,9 @@
-package com.example.forexample.helper;
+package com.example.forexample.ui.main;
 
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -28,7 +27,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Queue;
 
-public abstract class MySwipeHelper extends ItemTouchHelper.SimpleCallback {
+public abstract class RecyclerSwiper extends ItemTouchHelper.SimpleCallback {
 
 
     int buttonWidth;
@@ -85,7 +84,7 @@ public abstract class MySwipeHelper extends ItemTouchHelper.SimpleCallback {
         }
     };
 
-    public MySwipeHelper(Context context, RecyclerView recyclerView, int buttonWidth) {
+    public RecyclerSwiper(Context context, RecyclerView recyclerView, int buttonWidth) {
         super(0, ItemTouchHelper.LEFT);
         this.recyclerView = recyclerView;
         this.buttonList = new ArrayList<>();
@@ -260,5 +259,9 @@ public abstract class MySwipeHelper extends ItemTouchHelper.SimpleCallback {
     }
 
     protected abstract void instantiateMyButton(RecyclerView.ViewHolder viewHolder, List<MyButton> buffer);
+
+    public interface MyButtonClickListener {
+        void onClick(int pos);
+    }
 }
 

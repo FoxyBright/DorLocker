@@ -13,10 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.forexample.DataClasses.DataDoors;
-import com.example.forexample.DataClasses.Doors;
-import com.example.forexample.API.SingletonRetrofitObject;
-import com.example.forexample.helper.MySwipeHelper;
+import com.example.forexample.Services.Responces.DoorResponse;
+import com.example.forexample.Classes.Door;
+import com.example.forexample.Services.Retrofit.mRetrofit;
+import com.example.forexample.ui.main.RecyclerSwiper;
 
 import java.util.List;
 
@@ -27,24 +27,24 @@ import retrofit2.Response;
 public class DoorListFragment extends Fragment {
 
     private RecyclerView recycler;
-    private List<Doors> DoorsArray;
+    private List<Door> doorArray;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_door_list, container, false);
         recycler = view.findViewById(R.id.recycler);
-        DoorsArray = new DataDoors().getDataDoors();
+        doorArray = new DoorResponse().getDoors();
         recycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        SingletonRetrofitObject api = SingletonRetrofitObject.getInstance();
-        Call<DataDoors> getDoorsCall = api.getJSONApi().getDoors();
-        getDoorsCall.enqueue(new Callback<DataDoors>() {
+        mRetrofit api = mRetrofit.getInstance();
+        Call<DoorResponse> getDoorsCall = api.getAPI().getDoors();
+        getDoorsCall.enqueue(new Callback<DoorResponse>() {
             @Override
-            public void onResponse(@NonNull Call<DataDoors> call, @NonNull Response<DataDoors> response) {
+            public void onResponse(@NonNull Call<DoorResponse> call, @NonNull Response<DoorResponse> response) {
                 assert response.body() != null;
-                DoorsArray = response.body().getDataDoors();
+                doorArray = response.body().getDoors();
                 try {
-                    MySwipeHelper mySwipeHelper = new MySwipeHelper(getActivity(), recycler, 200) {
+                    RecyclerSwiper mySwipeHelper = new RecyclerSwiper(getActivity(), recycler, 200) {
                         @Override
                         protected void instantiateMyButton(RecyclerView.ViewHolder viewHolder, List<MyButton> buffer) {
 
@@ -53,23 +53,23 @@ public class DoorListFragment extends Fragment {
                                     45,
                                     R.drawable.favorite_disactivate,
                                     Color.parseColor("#F6F6F6"),
-                                    pos -> Toast.makeText(getActivity(), "Favorite " + DoorsArray.get(pos).getName(), Toast.LENGTH_SHORT).show()));
+                                    pos -> Toast.makeText(getActivity(), "Favorite " + doorArray.get(pos).getName(), Toast.LENGTH_SHORT).show()));
                             buffer.add(new MyButton(getActivity(),
                                     "",
                                     45,
                                     R.drawable.edit,
                                     Color.parseColor("#F6F6F6"),
-                                    pos -> Toast.makeText(getActivity(), "Edit " + DoorsArray.get(pos).getName(), Toast.LENGTH_SHORT).show()));
+                                    pos -> Toast.makeText(getActivity(), "Edit " + doorArray.get(pos).getName(), Toast.LENGTH_SHORT).show()));
                         }
                     };
                 } catch (Exception ignored) {
                 }
-                DoorsRecyclerAdapter doorsRecyclerAdapter = new DoorsRecyclerAdapter(getActivity(), DoorsArray);
+                DoorsRecyclerAdapter doorsRecyclerAdapter = new DoorsRecyclerAdapter(getActivity(), doorArray);
                 recycler.setAdapter(doorsRecyclerAdapter);
             }
 
             @Override
-            public void onFailure(@NonNull Call<DataDoors> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<DoorResponse> call, @NonNull Throwable t) {
                 Toast.makeText(getActivity(), "Ошибка получения данных от дверей", Toast.LENGTH_SHORT).show();
             }
         });

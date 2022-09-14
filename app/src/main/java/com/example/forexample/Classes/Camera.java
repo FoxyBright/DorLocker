@@ -1,9 +1,9 @@
-package com.example.forexample.DataClasses;
+package com.example.forexample.Classes;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Cameras {
+public class Camera {
 
     @SerializedName("name")
     @Expose
@@ -24,6 +24,9 @@ public class Cameras {
     @Expose
     private Boolean rec;
 
+    public Camera() {
+    }
+
     public String getName() {
         return name;
     }
@@ -34,10 +37,6 @@ public class Cameras {
 
     public String getSnapshot() {
         return snapshot;
-    }
-
-    public void setSnapshot(String snapshot) {
-        this.snapshot = snapshot;
     }
 
     public String getRoom() {
@@ -60,16 +59,7 @@ public class Cameras {
         return favorites;
     }
 
-    public void setFavorites(Boolean favorites) {
-        this.favorites = favorites;
-    }
-
     public Boolean getRec() {
         return rec;
     }
-
-    public void setRec(Boolean rec) {
-        this.rec = rec;
-    }
-
 }

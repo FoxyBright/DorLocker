@@ -2,8 +2,6 @@ package com.example.forexample;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Camera;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,22 +14,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.example.forexample.DataClasses.Cameras;
-import com.example.forexample.DataClasses.CamerasData;
+import com.example.forexample.Classes.Camera;
 
 import java.util.List;
 
 public class CamerasRecyclerAdapter extends RecyclerView.Adapter<CamerasRecyclerAdapter.ViewHolder> {
 
     Context context;
-    List<Cameras> CamerasData;
-    List<String> RoomsData;
+    List<Camera> cameraData;
 
     @SuppressLint("NotifyDataSetChanged")
-    public CamerasRecyclerAdapter(Context context, List<Cameras> CamerasData, List<String> RoomsData) {
+    public CamerasRecyclerAdapter(Context context, List<Camera> cameraData) {
         this.context = context;
-        this.CamerasData = CamerasData;
-        this.RoomsData = RoomsData;
+        this.cameraData = cameraData;
         notifyDataSetChanged();
     }
 
@@ -44,14 +39,14 @@ public class CamerasRecyclerAdapter extends RecyclerView.Adapter<CamerasRecycler
     }
 
     private void getCamerasData(ViewHolder holder, int position) {
-        holder.cam_num.setText(CamerasData.get(position).getName());
-        Glide.with(context).load(CamerasData.get(position).getSnapshot())
+        holder.cam_num.setText(cameraData.get(position).getName());
+        Glide.with(context).load(cameraData.get(position).getSnapshot())
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(holder.roundedImageView);
-        if (CamerasData.get(position).getRec()) {
+        if (cameraData.get(position).getRec()) {
             holder.rec.setVisibility(View.VISIBLE);
         }
-        if (CamerasData.get(position).getFavorites()) {
+        if (cameraData.get(position).getFavorites()) {
             holder.star.setVisibility(View.VISIBLE);
         }
     }
@@ -59,23 +54,14 @@ public class CamerasRecyclerAdapter extends RecyclerView.Adapter<CamerasRecycler
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.roundedImageView.setClipToOutline(true);
-
-
-//        if (RoomsData.size() > 0) {
-//            try {
-        holder.room_name.setText(RoomsData.get(RoomsData.indexOf(CamerasData.get(position).getRoom())));
+        holder.room_name.setText(cameraData.get(position).getRoom());
         holder.room_name.setVisibility(View.VISIBLE);
-//                RoomsData.remove(RoomsData.get(RoomsData.indexOf(CamerasData.get(position).getRoom())));
-//                CamerasData.remove(CamerasData.get(position));
-//            } catch (Exception ignored) {
-//            }
-//        }
         getCamerasData(holder, position);
     }
 
     @Override
     public int getItemCount() {
-        return CamerasData.size();
+        return cameraData.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
