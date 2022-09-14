@@ -39,7 +39,6 @@ public class DoorsRecyclerAdapter extends RecyclerView.Adapter<DoorsRecyclerAdap
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.door_name.setText(dataDoors.get(position).getName());
         holder.door_locker.setOnClickListener(v -> {
-            //TODO: Клик замочка открытия двери
             Toast.makeText(context, "Дверь " + dataDoors.get(holder.getAdapterPosition()).getName() + " открыта", Toast.LENGTH_SHORT).show();
         });
         holder.play_button.setOnClickListener(v -> {

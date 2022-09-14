@@ -1,11 +1,11 @@
-package com.example.forexample.Services.Responces;
+package com.example.forexample.Services.Requests;
 
 import com.example.forexample.Classes.Camera;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
-public class CamerasResponse implements Response {
+public class CamerasRequest implements Request {
 
     @SerializedName("data")
     @Expose

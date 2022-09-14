@@ -1,5 +1,6 @@
 package com.example.forexample;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -11,10 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.forexample.Classes.Camera;
-import com.example.forexample.Services.Responces.CamerasResponse;
+import com.example.forexample.Services.Requests.CamerasRequest;
 import com.example.forexample.Services.Retrofit.mRetrofit;
 import com.example.forexample.UI.RecyclerSwiper;
 
@@ -26,44 +28,46 @@ import retrofit2.Response;
 
 public class CamerasFragment extends Fragment {
 
-    private RecyclerView recyclerView;
-    private List<Camera> cameraData;
+    private RecyclerView recycler;
+    private List<Camera> cameras;
     public CamerasRecyclerAdapter CamerasRecyclerAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_cameras, container, false);
-        recyclerView = view.findViewById(R.id.recycler);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        Call<CamerasResponse> getCamerasCall = mRetrofit.getInstance().getAPI().getCameras();
-        getCamerasCall.enqueue(new Callback<CamerasResponse>() {
-            @Override
-            public void onResponse(@NonNull Call<CamerasResponse> call, @NonNull Response<CamerasResponse> response) {
-                assert response.body() != null;
-                cameraData = response.body().getData();
-                try {
-                    RecyclerSwiper mySwipeHelper = new RecyclerSwiper(getActivity(), recyclerView, 150) {
-                        @Override
-                        protected void instantiateMyButton(RecyclerView.ViewHolder viewHolder, List<MyButton> buffer) {
+        Context context = getActivity();
+        recycler = view.findViewById(R.id.recycler);
+        TextView error = view.findViewById(R.id.error);
+        recycler.setLayoutManager(new LinearLayoutManager(context));
+        try {
+            RecyclerSwiper mySwipeHelper = new RecyclerSwiper(context, recycler, 150) {
+                @Override
+                protected void instantiateMyButton(RecyclerView.ViewHolder viewHolder, List<MyButton> buffer) {
 
-                            buffer.add(new MyButton(getActivity(),
-                                    "",
-                                    45,
-                                    R.drawable.favorite_button_disactivate,
-                                    Color.parseColor("#F6F6F6"),
-                                    pos -> Toast.makeText(getActivity(), "Favorite " + cameraData.get(pos).getName(), Toast.LENGTH_SHORT).show()));
-                        }
-                    };
-                } catch (Exception ignored) {
+                    buffer.add(new MyButton(context,
+                            "",
+                            45,
+                            R.drawable.favorite_button_disactivate,
+                            Color.parseColor("#F6F6F6"),
+                            pos -> Toast.makeText(context, "Favorite " + cameras.get(pos).getName(), Toast.LENGTH_SHORT).show()));
                 }
-                CamerasRecyclerAdapter = new CamerasRecyclerAdapter(getActivity(), cameraData);
-                recyclerView.setAdapter(CamerasRecyclerAdapter);
+            };
+        } catch (Exception ignored) {
+        }
+
+        Call<CamerasRequest> getCamerasCall = mRetrofit.getInstance().getAPI().getCameras();
+        getCamerasCall.enqueue(new Callback<CamerasRequest>() {
+            @Override
+            public void onResponse(Call<CamerasRequest> call, Response<CamerasRequest> response) {
+                cameras = response.body().getData();
+                CamerasRecyclerAdapter = new CamerasRecyclerAdapter(context, cameras);
+                recycler.setAdapter(CamerasRecyclerAdapter);
             }
 
             @Override
-            public void onFailure(@NonNull Call<CamerasResponse> call, @NonNull Throwable t) {
-                Toast.makeText(getActivity(), "Ошибка получения данных c камер", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<CamerasRequest> call, Throwable t) {
+                error.setVisibility(View.VISIBLE);
+                recycler.setVisibility(View.GONE);
             }
         });
 

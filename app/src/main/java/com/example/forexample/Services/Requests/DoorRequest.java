@@ -1,11 +1,11 @@
-package com.example.forexample.Services.Responces;
+package com.example.forexample.Services.Requests;
 
 import java.util.List;
 import com.example.forexample.Classes.Door;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class DoorResponse implements Response {
+public class DoorRequest implements Request {
 
     @SerializedName("data")
     @Expose

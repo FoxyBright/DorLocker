@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.forexample.Services.Responces.DoorResponse;
+import com.example.forexample.Services.Requests.DoorRequest;
 import com.example.forexample.Classes.Door;
 import com.example.forexample.Services.Retrofit.mRetrofit;
 import com.example.forexample.UI.RecyclerSwiper;
@@ -35,11 +35,10 @@ public class DoorsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_doors, container, false);
         recycler = view.findViewById(R.id.recycler);
         recycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRetrofit api = mRetrofit.getInstance();
-        Call<DoorResponse> getDoorsCall = api.getAPI().getDoors();
-        getDoorsCall.enqueue(new Callback<DoorResponse>() {
+        Call<DoorRequest> getDoorsCall = mRetrofit.getInstance().getAPI().getDoors();
+        getDoorsCall.enqueue(new Callback<DoorRequest>() {
             @Override
-            public void onResponse(@NonNull Call<DoorResponse> call, @NonNull Response<DoorResponse> response) {
+            public void onResponse(@NonNull Call<DoorRequest> call, @NonNull Response<DoorRequest> response) {
                 assert response.body() != null;
                 doorArray = response.body().getData();
                 try {
@@ -68,7 +67,7 @@ public class DoorsFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(@NonNull Call<DoorResponse> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<DoorRequest> call, @NonNull Throwable t) {
                 Toast.makeText(getActivity(), "Ошибка получения данных от дверей", Toast.LENGTH_SHORT).show();
             }
         });

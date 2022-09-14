@@ -1,15 +1,27 @@
 package com.example.forexample;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
+import com.example.forexample.Classes.Camera;
+import com.example.forexample.Services.Requests.CamerasRequest;
+import com.example.forexample.Services.Retrofit.mRetrofit;
 import com.example.forexample.databinding.ActivityMainBinding;
 import com.example.forexample.UI.TabLayout.CustomViewPager;
 import com.google.android.material.tabs.TabLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.forexample.UI.TabLayout.SectionsPagerAdapter;
 
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class MainActivity extends AppCompatActivity {
+
+    public static List<Camera> cameras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
