@@ -5,13 +5,14 @@ import com.example.forexample.Classes.Door;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class DoorResponse {
+public class DoorResponse implements Response {
 
     @SerializedName("data")
     @Expose
     private final List<Door> doors = null;
 
-    public List<Door> getDoors() {
+    @Override
+    public List<Door> getData() {
         return doors;
     }
 }

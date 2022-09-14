@@ -47,7 +47,7 @@
                 app:tabTextColor="@color/text_color" />
         </com.google.android.material.appbar.AppBarLayout>
 
-        <com.example.forexample.ui.main.CustomViewPager
+        <com.example.forexample.UI.TabLayout.CustomViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

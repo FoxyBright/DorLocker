@@ -1,4 +1,4 @@
-package com.example.forexample.ui.main;
+package com.example.forexample.UI.TabLayout;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

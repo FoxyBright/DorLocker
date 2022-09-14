@@ -1,4 +1,4 @@
-package com.example.forexample.ui.main;
+package com.example.forexample.UI;
 
 import android.content.Context;
 import android.content.res.Resources;

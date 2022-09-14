@@ -31,7 +31,7 @@ public class DoorsRecyclerAdapter extends RecyclerView.Adapter<DoorsRecyclerAdap
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_door, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.door_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -49,7 +49,7 @@ public class DoorsRecyclerAdapter extends RecyclerView.Adapter<DoorsRecyclerAdap
         });
         if (dataDoors.get(position).getSnapshot() != null) {
             Glide.with(context).load(dataDoors.get(position).getSnapshot()).diskCacheStrategy(DiskCacheStrategy.NONE).into(holder.roundedImageView);
-            holder.status_bar.setBackgroundResource(R.drawable.white_bottom_rounded_corner);
+            holder.status_bar.setBackgroundResource(R.drawable.bottom_rounded_corner_rect);
             holder.cam_video.setVisibility(View.VISIBLE);
             holder.status_network.setVisibility(View.VISIBLE);
             holder.roundedImageView.setClipToOutline(true);

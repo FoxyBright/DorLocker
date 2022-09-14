@@ -3,10 +3,10 @@ package com.example.forexample;
 import android.os.Bundle;
 
 import com.example.forexample.databinding.ActivityMainBinding;
-import com.example.forexample.ui.main.CustomViewPager;
+import com.example.forexample.UI.TabLayout.CustomViewPager;
 import com.google.android.material.tabs.TabLayout;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.forexample.ui.main.SectionsPagerAdapter;
+import com.example.forexample.UI.TabLayout.SectionsPagerAdapter;
 
 
 public class MainActivity extends AppCompatActivity {

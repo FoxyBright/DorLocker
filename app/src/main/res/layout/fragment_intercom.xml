@@ -60,7 +60,7 @@
             android:layout_height="14dp"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="8dp"
-            android:src="@drawable/record_on_circle"
+            android:src="@drawable/record_red_circle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -101,7 +101,7 @@
             android:textColor="@color/network_color"
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="23dp"
-            android:background="@drawable/white_back_rounded_corner"
+            android:background="@drawable/rounded_corner_rect"
             android:text="@string/open_door"
             android:textAllCaps="false"
             android:drawableTop="@drawable/key"
@@ -130,6 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:text="@string/settings"
+                android:fontFamily="@font/circe_regular"
                 android:textColor="@color/settings_color"
                 android:textSize="17sp" />
 
@@ -140,7 +141,7 @@
             android:contentDescription="@string/img_des"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:src="@drawable/back"
+            android:src="@drawable/back_button"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -153,7 +154,7 @@
             android:layout_height="32dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="30dp"
-            android:src="@drawable/black_screen"
+            android:src="@drawable/crossed_out_eye"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 

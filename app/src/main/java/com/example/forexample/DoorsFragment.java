@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.example.forexample.Services.Responces.DoorResponse;
 import com.example.forexample.Classes.Door;
 import com.example.forexample.Services.Retrofit.mRetrofit;
-import com.example.forexample.ui.main.RecyclerSwiper;
+import com.example.forexample.UI.RecyclerSwiper;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DoorListFragment extends Fragment {
+public class DoorsFragment extends Fragment {
 
     private RecyclerView recycler;
     private List<Door> doorArray;
@@ -32,9 +32,8 @@ public class DoorListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_door_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_doors, container, false);
         recycler = view.findViewById(R.id.recycler);
-        doorArray = new DoorResponse().getDoors();
         recycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRetrofit api = mRetrofit.getInstance();
         Call<DoorResponse> getDoorsCall = api.getAPI().getDoors();
@@ -42,7 +41,7 @@ public class DoorListFragment extends Fragment {
             @Override
             public void onResponse(@NonNull Call<DoorResponse> call, @NonNull Response<DoorResponse> response) {
                 assert response.body() != null;
-                doorArray = response.body().getDoors();
+                doorArray = response.body().getData();
                 try {
                     RecyclerSwiper mySwipeHelper = new RecyclerSwiper(getActivity(), recycler, 200) {
                         @Override
@@ -51,13 +50,13 @@ public class DoorListFragment extends Fragment {
                             buffer.add(new MyButton(getActivity(),
                                     "",
                                     45,
-                                    R.drawable.favorite_disactivate,
+                                    R.drawable.favorite_button_disactivate,
                                     Color.parseColor("#F6F6F6"),
                                     pos -> Toast.makeText(getActivity(), "Favorite " + doorArray.get(pos).getName(), Toast.LENGTH_SHORT).show()));
                             buffer.add(new MyButton(getActivity(),
                                     "",
                                     45,
-                                    R.drawable.edit,
+                                    R.drawable.edit_pencil,
                                     Color.parseColor("#F6F6F6"),
                                     pos -> Toast.makeText(getActivity(), "Edit " + doorArray.get(pos).getName(), Toast.LENGTH_SHORT).show()));
                         }

@@ -1,4 +1,4 @@
-package com.example.forexample.ui.main;
+package com.example.forexample.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;

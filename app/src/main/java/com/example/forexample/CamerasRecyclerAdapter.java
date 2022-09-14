@@ -34,7 +34,7 @@ public class CamerasRecyclerAdapter extends RecyclerView.Adapter<CamerasRecycler
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.fragment_cameras, parent, false);
+        View view = layoutInflater.inflate(R.layout.cameras_item, parent, false);
         return new ViewHolder(view);
     }
 

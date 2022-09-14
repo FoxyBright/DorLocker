@@ -5,11 +5,6 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.ConcatAdapter;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.CompositePageTransformer;
-import androidx.viewpager2.widget.MarginPageTransformer;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.forexample.databinding.PagerItemBinding;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.Objects;
@@ -52,7 +46,7 @@ public class IntercomFragment extends Fragment {
                     com.google.android.material.R.style.Base_Theme_Material3_Light_BottomSheetDialog);
 
             View bottomSheetView = LayoutInflater.from(getActivity()).inflate(
-                    R.layout.pager_item, view.findViewById(R.id.bottomSheetContainer));
+                    R.layout.settings, view.findViewById(R.id.bottomSheetContainer));
 
             bottomSheetDialog.setContentView(bottomSheetView);
             bottomSheetDialog.show();

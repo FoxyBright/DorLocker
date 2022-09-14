@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.example.forexample.Classes.Camera;
 import com.example.forexample.Services.Responces.CamerasResponse;
 import com.example.forexample.Services.Retrofit.mRetrofit;
-import com.example.forexample.ui.main.RecyclerSwiper;
+import com.example.forexample.UI.RecyclerSwiper;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CamerasListFragment extends Fragment {
+public class CamerasFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private List<Camera> cameraData;
@@ -33,7 +33,7 @@ public class CamerasListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_cameras_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_cameras, container, false);
         recyclerView = view.findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         Call<CamerasResponse> getCamerasCall = mRetrofit.getInstance().getAPI().getCameras();
@@ -41,7 +41,7 @@ public class CamerasListFragment extends Fragment {
             @Override
             public void onResponse(@NonNull Call<CamerasResponse> call, @NonNull Response<CamerasResponse> response) {
                 assert response.body() != null;
-                cameraData = response.body().getCameras();
+                cameraData = response.body().getData();
                 try {
                     RecyclerSwiper mySwipeHelper = new RecyclerSwiper(getActivity(), recyclerView, 150) {
                         @Override
@@ -50,7 +50,7 @@ public class CamerasListFragment extends Fragment {
                             buffer.add(new MyButton(getActivity(),
                                     "",
                                     45,
-                                    R.drawable.favorite_disactivate,
+                                    R.drawable.favorite_button_disactivate,
                                     Color.parseColor("#F6F6F6"),
                                     pos -> Toast.makeText(getActivity(), "Favorite " + cameraData.get(pos).getName(), Toast.LENGTH_SHORT).show()));
                         }
