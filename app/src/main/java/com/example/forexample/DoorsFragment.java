@@ -13,8 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.forexample.Services.Requests.DoorRequest;
 import com.example.forexample.Classes.Door;
+import com.example.forexample.Services.Requests.DoorRequest;
 import com.example.forexample.Services.Retrofit.mRetrofit;
 import com.example.forexample.UI.RecyclerSwiper;
 

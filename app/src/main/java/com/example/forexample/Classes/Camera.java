@@ -1,29 +1,43 @@
 package com.example.forexample.Classes;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.io.Serializable;
 
-import io.realm.RealmObject;
-
-public class Camera extends RealmObject {
+@Entity
+public class Camera implements Serializable {
 
     @SerializedName("name")
     @Expose
+    @ColumnInfo(name = "name")
     private String name;
+
     @SerializedName("snapshot")
     @Expose
+    @ColumnInfo (name = "snapshot")
     private String snapshot;
+
     @SerializedName("room")
     @Expose
+    @ColumnInfo (name = "room")
     private String room;
+
     @SerializedName("id")
     @Expose
+    @PrimaryKey()
     private Integer id;
+
     @SerializedName("favorites")
     @Expose
+    @ColumnInfo (name = "favorites")
     private Boolean favorites;
+
     @SerializedName("rec")
     @Expose
+    @ColumnInfo (name = "rec")
     private Boolean rec;
 
     public void setSnapshot(String snapshot) {
@@ -36,9 +50,6 @@ public class Camera extends RealmObject {
 
     public void setRec(Boolean rec) {
         this.rec = rec;
-    }
-
-    public Camera() {
     }
 
     public String getName() {
