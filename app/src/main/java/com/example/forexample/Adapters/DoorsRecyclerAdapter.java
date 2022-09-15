@@ -33,6 +33,7 @@ public class DoorsRecyclerAdapter extends RecyclerSwipeAdapter<DoorsRecyclerAdap
         this.dataDoors = dataDoors;
     }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.door_item, parent, false);
@@ -43,9 +44,7 @@ public class DoorsRecyclerAdapter extends RecyclerSwipeAdapter<DoorsRecyclerAdap
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
         holder.door_name.setText(dataDoors.get(position).getName());
-        holder.door_locker.setOnClickListener(v -> {
-            Toast.makeText(context, "Дверь " + dataDoors.get(holder.getAdapterPosition()).getName() + " открыта", Toast.LENGTH_SHORT).show();
-        });
+        holder.door_locker.setOnClickListener(v -> Toast.makeText(context, "Дверь " + dataDoors.get(holder.getAdapterPosition()).getName() + " открыта", Toast.LENGTH_SHORT).show());
 
         holder.play_button.setOnClickListener(v -> {
             AppCompatActivity activity = (AppCompatActivity) v.getContext();
@@ -65,7 +64,8 @@ public class DoorsRecyclerAdapter extends RecyclerSwipeAdapter<DoorsRecyclerAdap
         holder.star.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "Clicked on Favorite " + holder.door_name.getText().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "Clicked on Favorite "
+                        + holder.door_name.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -78,7 +78,7 @@ public class DoorsRecyclerAdapter extends RecyclerSwipeAdapter<DoorsRecyclerAdap
         });
 
         holder.swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
-        holder.swipeLayout.addDrag(SwipeLayout.DragEdge.Right, holder.swipeLayout.findViewById(R.id.bottom_wrapper));
+        holder.swipeLayout.addDrag(SwipeLayout.DragEdge.Right, holder.swipeLayout.findViewById(R.id.left_swipe));
         mItemManger.bindView(holder.itemView, position);
     }
 
@@ -89,10 +89,10 @@ public class DoorsRecyclerAdapter extends RecyclerSwipeAdapter<DoorsRecyclerAdap
 
     @Override
     public int getSwipeLayoutResourceId(int position) {
-        return R.id.swipe;
+        return R.id.door_swipe;
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         SwipeLayout swipeLayout;
         ImageView door_locker;
         ImageView play_button;
@@ -115,7 +115,7 @@ public class DoorsRecyclerAdapter extends RecyclerSwipeAdapter<DoorsRecyclerAdap
             cam_video = itemView.findViewById(R.id.cam_video);
             status_bar = itemView.findViewById(R.id.status_bar);
             view = itemView.findViewById(R.id.view);
-            swipeLayout = itemView.findViewById(R.id.swipe);
+            swipeLayout = itemView.findViewById(R.id.door_swipe);
             edit = itemView.findViewById(R.id.edit);
             star = itemView.findViewById(R.id.star);
         }

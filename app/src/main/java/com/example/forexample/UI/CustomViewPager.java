@@ -1,4 +1,4 @@
-package com.example.forexample.UI.TabLayout;
+package com.example.forexample.UI;
 
 import android.content.Context;
 import android.util.AttributeSet;

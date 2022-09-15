@@ -39,9 +39,9 @@ public class DoorsFragment extends Fragment {
         }
 
         recycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        DoorsRecyclerAdapter mAdapter = new DoorsRecyclerAdapter(getActivity(), doors);
-        ((DoorsRecyclerAdapter) mAdapter).setMode(Attributes.Mode.Single);
-        recycler.setAdapter(new DoorsRecyclerAdapter(getActivity(), doors));
+        DoorsRecyclerAdapter adapter = new DoorsRecyclerAdapter(getActivity(), doors);
+        ((DoorsRecyclerAdapter) adapter).setMode(Attributes.Mode.Single);
+        recycler.setAdapter(adapter);
 
         return view;
     }

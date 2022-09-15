@@ -1,45 +1,48 @@
 package com.example.forexample.Adapters;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.daimajia.swipe.SwipeLayout;
+import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import com.example.forexample.Models.Camera;
 import com.example.forexample.R;
 
 import java.util.List;
 
-public class CamerasRecyclerAdapter extends RecyclerView.Adapter<CamerasRecyclerAdapter.ViewHolder> {
+public class CamerasRecyclerAdapter extends RecyclerSwipeAdapter<CamerasRecyclerAdapter.ViewHolder> {
 
     Context context;
     List<Camera> cameraData;
 
-    @SuppressLint("NotifyDataSetChanged")
     public CamerasRecyclerAdapter(Context context, List<Camera> cameraData) {
         this.context = context;
         this.cameraData = cameraData;
-        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.cameras_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cameras_item, parent, false);
         return new ViewHolder(view);
     }
 
-    private void getCamerasData(ViewHolder holder, int position) {
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.roundedImageView.setClipToOutline(true);
+        holder.room_name.setText(cameraData.get(position).getRoom());
+        holder.room_name.setVisibility(View.VISIBLE);
+
         holder.cam_num.setText(cameraData.get(position).getName());
         Glide.with(context).load(cameraData.get(position).getSnapshot())
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -50,19 +53,28 @@ public class CamerasRecyclerAdapter extends RecyclerView.Adapter<CamerasRecycler
         if (cameraData.get(position).getFavorites()) {
             holder.star.setVisibility(View.VISIBLE);
         }
-    }
 
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.roundedImageView.setClipToOutline(true);
-        holder.room_name.setText(cameraData.get(position).getRoom());
-        holder.room_name.setVisibility(View.VISIBLE);
-        getCamerasData(holder, position);
+        holder.favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(view.getContext(), "Clicked on Favorite "
+                        + holder.cam_num.getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        holder.swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
+        holder.swipeLayout.addDrag(SwipeLayout.DragEdge.Right, holder.swipeLayout.findViewById(R.id.left_swipe));
+        mItemManger.bindView(holder.itemView, position);
     }
 
     @Override
     public int getItemCount() {
         return cameraData.size();
+    }
+
+    @Override
+    public int getSwipeLayoutResourceId(int position) {
+        return R.id.cam_swipe;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -71,19 +83,21 @@ public class CamerasRecyclerAdapter extends RecyclerView.Adapter<CamerasRecycler
         TextView cam_num;
         ImageView play_button;
         ImageView star;
+        ImageView favorite;
         ImageView rec;
         ImageView roundedImageView;
-        LinearLayout cam_linear_layout;
+        SwipeLayout swipeLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             rec = itemView.findViewById(R.id.rec);
             star = itemView.findViewById(R.id.star);
+            favorite = itemView.findViewById(R.id.favorite);
             play_button = itemView.findViewById(R.id.play_button);
             roundedImageView = itemView.findViewById(R.id.roundedImageView);
             cam_num = itemView.findViewById(R.id.cam_num);
             room_name = itemView.findViewById(R.id.room_name);
-            cam_linear_layout = itemView.findViewById(R.id.cam_linear_layout);
+            swipeLayout = itemView.findViewById(R.id.cam_swipe);
         }
     }
 }
