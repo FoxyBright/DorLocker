@@ -20,10 +20,6 @@
         <activity
             android:screenOrientation="portrait"
             android:name=".MainActivity"
-            android:exported="false" />
-        <activity
-            android:screenOrientation="portrait"
-            android:name=".UI.SplashActivity"
             android:exported="true"
             android:label="Doors Opener"
             android:theme="@style/Theme.ForExample.NoActionBar">
