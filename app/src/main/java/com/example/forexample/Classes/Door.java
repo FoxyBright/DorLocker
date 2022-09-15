@@ -3,7 +3,9 @@ package com.example.forexample.Classes;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Door {
+import io.realm.RealmObject;
+
+public class Door{
 
     @SerializedName("name")
     @Expose
@@ -14,6 +16,21 @@ public class Door {
     @SerializedName("snapshot")
     @Expose
     private String snapshot;
+    @SerializedName("favorites")
+    @Expose
+    private Boolean favorites;
+
+    public void setSnapshot(String snapshot) {
+        this.snapshot = snapshot;
+    }
+
+    public Boolean getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(Boolean favorites) {
+        this.favorites = favorites;
+    }
 
     public String getName() {
         return name;
