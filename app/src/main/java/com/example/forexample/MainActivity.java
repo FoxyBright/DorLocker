@@ -1,6 +1,8 @@
 package com.example.forexample;
 
 import android.os.Bundle;
+import android.widget.Toast;
+
 import com.example.forexample.Models.Camera;
 import com.example.forexample.Models.Door;
 import com.example.forexample.Services.DataBase.Database;
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(@NonNull Call<CamerasRequest> call, @NonNull Throwable t) {
+                Toast.makeText(MainActivity.this, "Данные с камер не получены, проверьте соединение с Интернетом", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -58,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(@NonNull Call<DoorRequest> call, @NonNull Throwable t) {
+                Toast.makeText(MainActivity.this, "Данные с камер не получены, проверьте соединение с Интернетом", Toast.LENGTH_SHORT).show();
             }
         });
     }

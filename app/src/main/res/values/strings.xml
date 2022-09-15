@@ -15,6 +15,7 @@
     <string name="open_door">Открыть дверь</string>
     <string name="live_broadcast">Прямая \nтрансляция</string>
     <string name="visitors">2</string>
+    <string name="empty">Данные отсутствуют, \n проверьте соединение с Интернетом</string>
     <string name="not_cameras">Данные о камерах не получены, \n проверьте соединение с Интернетом</string>
     <string name="not_doors">Данные о дверях не получены, \n проверьте соединение с Интернетом</string>
 </resources>

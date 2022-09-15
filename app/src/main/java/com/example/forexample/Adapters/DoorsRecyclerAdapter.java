@@ -15,13 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.daimajia.swipe.SwipeLayout;
+import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import com.example.forexample.Models.Door;
 import com.example.forexample.Fragments.IntercomFragment;
 import com.example.forexample.R;
 
 import java.util.List;
 
-public class DoorsRecyclerAdapter extends RecyclerView.Adapter<DoorsRecyclerAdapter.ViewHolder> {
+public class DoorsRecyclerAdapter extends RecyclerSwipeAdapter<DoorsRecyclerAdapter.ViewHolder> {
 
     Context context;
     List<Door> dataDoors;
@@ -39,15 +41,18 @@ public class DoorsRecyclerAdapter extends RecyclerView.Adapter<DoorsRecyclerAdap
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
+
         holder.door_name.setText(dataDoors.get(position).getName());
         holder.door_locker.setOnClickListener(v -> {
             Toast.makeText(context, "Дверь " + dataDoors.get(holder.getAdapterPosition()).getName() + " открыта", Toast.LENGTH_SHORT).show();
         });
+
         holder.play_button.setOnClickListener(v -> {
             AppCompatActivity activity = (AppCompatActivity) v.getContext();
             IntercomFragment intercom_frag = new IntercomFragment();
             activity.getSupportFragmentManager().beginTransaction().replace(R.id.main, intercom_frag, "FragmentTransaction").addToBackStack(null).commit();
         });
+
         if (dataDoors.get(position).getSnapshot() != null) {
             Glide.with(context).load(dataDoors.get(position).getSnapshot()).diskCacheStrategy(DiskCacheStrategy.NONE).into(holder.roundedImageView);
             holder.status_bar.setBackgroundResource(R.drawable.bottom_rounded_corner_rect);
@@ -56,6 +61,25 @@ public class DoorsRecyclerAdapter extends RecyclerView.Adapter<DoorsRecyclerAdap
             holder.roundedImageView.setClipToOutline(true);
             holder.view.setVisibility(View.VISIBLE);
         }
+
+        holder.star.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(view.getContext(), "Clicked on Favorite " + holder.door_name.getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        holder.edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Toast.makeText(view.getContext(), "Clicked on Edit  " + holder.door_name.getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        holder.swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
+        holder.swipeLayout.addDrag(SwipeLayout.DragEdge.Right, holder.swipeLayout.findViewById(R.id.bottom_wrapper));
+        mItemManger.bindView(holder.itemView, position);
     }
 
     @Override
@@ -63,10 +87,17 @@ public class DoorsRecyclerAdapter extends RecyclerView.Adapter<DoorsRecyclerAdap
         return dataDoors.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public int getSwipeLayoutResourceId(int position) {
+        return R.id.swipe;
+    }
 
+    class ViewHolder extends RecyclerView.ViewHolder {
+        SwipeLayout swipeLayout;
         ImageView door_locker;
         ImageView play_button;
+        ImageView edit;
+        ImageView star;
         ImageView roundedImageView;
         TextView door_name;
         TextView status_network;
@@ -84,6 +115,9 @@ public class DoorsRecyclerAdapter extends RecyclerView.Adapter<DoorsRecyclerAdap
             cam_video = itemView.findViewById(R.id.cam_video);
             status_bar = itemView.findViewById(R.id.status_bar);
             view = itemView.findViewById(R.id.view);
+            swipeLayout = itemView.findViewById(R.id.swipe);
+            edit = itemView.findViewById(R.id.edit);
+            star = itemView.findViewById(R.id.star);
         }
     }
 }
