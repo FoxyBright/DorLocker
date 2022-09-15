@@ -13,34 +13,27 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.forexample.Classes.Camera;
-import com.example.forexample.Services.DataBase.AppDatabase;
+import com.example.forexample.Services.DataBase.Database;
 import com.example.forexample.UI.RecyclerSwiper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CamerasFragment extends Fragment {
 
-    private RecyclerView recycler;
-    public CamerasRecyclerAdapter CamerasRecyclerAdapter;
-    public List<Camera> cameras;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cameras, container, false);
-        recycler = view.findViewById(R.id.recycler);
+
+        RecyclerView recycler = view.findViewById(R.id.recycler);
         recycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        AppDatabase database = AppDatabase.getInstance(getActivity(), "database");
-        cameras = new ArrayList<>();
-        cameras = database.DAO().getCameras();
-        CamerasRecyclerAdapter = new CamerasRecyclerAdapter(getActivity(), cameras);
-        recycler.setAdapter(CamerasRecyclerAdapter);
+        List<Camera> cameras = Database.getInstance(getActivity()).DAO().getCameras();
+        recycler.setAdapter(new CamerasRecyclerAdapter(getActivity(), cameras));
+
         try {
             RecyclerSwiper mySwipeHelper = new RecyclerSwiper(getActivity(), recycler, 150) {
                 @Override
                 protected void instantiateMyButton(RecyclerView.ViewHolder viewHolder, List<MyButton> buffer) {
-
-                    buffer.add(new MyButton(getActivity(),
+                    buffer.add(new MyButton(requireActivity(),
                             "",
                             45,
                             R.drawable.favorite_button_disactivate,
@@ -50,6 +43,7 @@ public class CamerasFragment extends Fragment {
             };
         } catch (Exception ignored) {
         }
+
         return view;
     }
 }

@@ -2,23 +2,22 @@ package com.example.forexample.Services.DataBase;
 
 import android.content.Context;
 
-import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.forexample.Classes.Camera;
 import com.example.forexample.Classes.Door;
 
-@Database(entities = {Camera.class}, version = 1, exportSchema = false)
-public abstract class AppDatabase extends RoomDatabase {
+@androidx.room.Database(entities = {Camera.class, Door.class}, version = 2, exportSchema = false)
+public abstract class Database extends RoomDatabase {
 
-    private static AppDatabase database;
+    private static Database database;
 
-    public static AppDatabase getInstance(Context context, String DATABASE_NAME){
+    public static Database getInstance(Context context) {
 
-        if (database == null){
+        if (database == null) {
             database = Room.databaseBuilder(context.getApplicationContext(),
-                    AppDatabase.class, DATABASE_NAME)
+                            Database.class, "database")
                     .allowMainThreadQueries()
                     .fallbackToDestructiveMigration()
                     .build();

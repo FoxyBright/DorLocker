@@ -1,4 +1,4 @@
-package com.example.forexample.Services.Requests;
+package com.example.forexample.Services.Retrofit.Requests;
 
 import java.util.List;
 import com.example.forexample.Classes.Door;

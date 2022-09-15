@@ -1,4 +1,4 @@
-package com.example.forexample.Services.Requests;
+package com.example.forexample.Services.Retrofit.Requests;
 
 import com.example.forexample.Classes.Camera;
 import com.google.gson.annotations.Expose;

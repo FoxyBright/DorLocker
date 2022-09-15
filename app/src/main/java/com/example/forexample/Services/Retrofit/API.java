@@ -1,7 +1,7 @@
 package com.example.forexample.Services.Retrofit;
 
-import com.example.forexample.Services.Requests.CamerasRequest;
-import com.example.forexample.Services.Requests.DoorRequest;
+import com.example.forexample.Services.Retrofit.Requests.CamerasRequest;
+import com.example.forexample.Services.Retrofit.Requests.DoorRequest;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

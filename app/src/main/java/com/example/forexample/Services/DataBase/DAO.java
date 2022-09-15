@@ -19,4 +19,10 @@ public interface DAO {
 
     @Query("SELECT * FROM Camera")
     List<Camera> getCameras();
+
+    @Insert(onConflict = REPLACE)
+    void insertDoor(Door door);
+
+    @Query("SELECT * FROM Door")
+    List<Door> getDoors();
 }
