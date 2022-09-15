@@ -5,8 +5,8 @@ import android.content.Context;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.example.forexample.Classes.Camera;
-import com.example.forexample.Classes.Door;
+import com.example.forexample.Models.Camera;
+import com.example.forexample.Models.Door;
 
 @androidx.room.Database(entities = {Camera.class, Door.class}, version = 2, exportSchema = false)
 public abstract class Database extends RoomDatabase {

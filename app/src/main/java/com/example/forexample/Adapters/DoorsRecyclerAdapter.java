@@ -1,4 +1,4 @@
-package com.example.forexample;
+package com.example.forexample.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -15,7 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.example.forexample.Classes.Door;
+import com.example.forexample.Models.Door;
+import com.example.forexample.Fragments.IntercomFragment;
+import com.example.forexample.R;
 
 import java.util.List;
 

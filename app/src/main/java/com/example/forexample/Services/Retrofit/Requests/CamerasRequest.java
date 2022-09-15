@@ -1,6 +1,6 @@
 package com.example.forexample.Services.Retrofit.Requests;
 
-import com.example.forexample.Classes.Camera;
+import com.example.forexample.Models.Camera;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;

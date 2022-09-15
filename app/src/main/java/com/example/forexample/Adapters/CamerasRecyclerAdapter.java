@@ -1,4 +1,4 @@
-package com.example.forexample;
+package com.example.forexample.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -14,7 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.example.forexample.Classes.Camera;
+import com.example.forexample.Models.Camera;
+import com.example.forexample.R;
 
 import java.util.List;
 

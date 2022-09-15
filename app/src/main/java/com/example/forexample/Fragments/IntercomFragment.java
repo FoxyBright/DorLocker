@@ -1,4 +1,4 @@
-package com.example.forexample;
+package com.example.forexample.Fragments;
 
 import android.os.Bundle;
 
@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.forexample.R;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.Objects;

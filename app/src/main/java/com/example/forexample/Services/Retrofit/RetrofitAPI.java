@@ -1,24 +1,18 @@
 package com.example.forexample.Services.Retrofit;
 
-import com.example.forexample.Classes.Camera;
 import com.itkacher.okprofiler.BuildConfig;
 import com.localebro.okhttpprofiler.OkHttpProfilerInterceptor;
 
-import java.util.List;
-
 import okhttp3.OkHttpClient;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class mRetrofit {
+public class RetrofitAPI {
     public static final String BASE_URL = "http://cars.cprogroup.ru/";
     public static Retrofit mRetrofit;
-    private static com.example.forexample.Services.Retrofit.mRetrofit mInstance;
+    private static RetrofitAPI mInstance;
 
-    private mRetrofit() {
+    private RetrofitAPI() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         if (BuildConfig.DEBUG) {
             builder.addInterceptor(new OkHttpProfilerInterceptor());
@@ -31,9 +25,9 @@ public class mRetrofit {
                 .build();
     }
 
-    public static com.example.forexample.Services.Retrofit.mRetrofit getInstance() {
+    public static RetrofitAPI getInstance() {
         if (mInstance == null) {
-            mInstance = new mRetrofit();
+            mInstance = new RetrofitAPI();
         }
         return mInstance;
     }

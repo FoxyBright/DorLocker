@@ -1,12 +1,12 @@
 package com.example.forexample;
 
 import android.os.Bundle;
-import com.example.forexample.Classes.Camera;
-import com.example.forexample.Classes.Door;
+import com.example.forexample.Models.Camera;
+import com.example.forexample.Models.Door;
 import com.example.forexample.Services.DataBase.Database;
 import com.example.forexample.Services.Retrofit.Requests.CamerasRequest;
 import com.example.forexample.Services.Retrofit.Requests.DoorRequest;
-import com.example.forexample.Services.Retrofit.mRetrofit;
+import com.example.forexample.Services.Retrofit.RetrofitAPI;
 import com.example.forexample.databinding.ActivityMainBinding;
 import com.example.forexample.UI.TabLayout.CustomViewPager;
 import com.google.android.material.tabs.TabLayout;
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager.beginFakeDrag();
         tabs.setupWithViewPager(viewPager);
         Database database = Database.getInstance(this);
-        Call<CamerasRequest> getCamerasCall = mRetrofit.getInstance().getAPI().getCameras();
+        Call<CamerasRequest> getCamerasCall = RetrofitAPI.getInstance().getAPI().getCameras();
         getCamerasCall.enqueue(new Callback<CamerasRequest>() {
             @Override
             public void onResponse(@NonNull Call<CamerasRequest> call, @NonNull Response<CamerasRequest> response) {
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Call<DoorRequest> getDoorCall = mRetrofit.getInstance().getAPI().getDoors();
+        Call<DoorRequest> getDoorCall = RetrofitAPI.getInstance().getAPI().getDoors();
         getDoorCall.enqueue(new Callback<DoorRequest>() {
             @Override
             public void onResponse(@NonNull Call<DoorRequest> call, @NonNull Response<DoorRequest> response) {
