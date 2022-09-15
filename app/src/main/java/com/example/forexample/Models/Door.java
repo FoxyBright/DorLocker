@@ -3,8 +3,10 @@ package com.example.forexample.Models;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 @Entity
@@ -22,12 +24,12 @@ public class Door implements Serializable {
 
     @SerializedName("snapshot")
     @Expose
-    @ColumnInfo (name = "snapshot")
+    @ColumnInfo(name = "snapshot")
     private String snapshot;
 
     @SerializedName("favorites")
     @Expose
-    @ColumnInfo (name = "favorites")
+    @ColumnInfo(name = "favorites")
     private Boolean favorites;
 
     public void setSnapshot(String snapshot) {

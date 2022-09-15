@@ -15,6 +15,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.forexample.UI.SectionsPagerAdapter;
 
 import retrofit2.Call;
@@ -42,9 +43,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call<CamerasRequest> call, @NonNull Response<CamerasRequest> response) {
                 assert response.body() != null;
-                for (Camera camera: response.body().getData())
+                for (Camera camera : response.body().getData())
                     database.DAO().insertCamera(camera);
             }
+
             @Override
             public void onFailure(@NonNull Call<CamerasRequest> call, @NonNull Throwable t) {
                 Toast.makeText(MainActivity.this, "Данные с камер не получены, проверьте соединение с Интернетом", Toast.LENGTH_SHORT).show();
@@ -56,9 +58,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call<DoorRequest> call, @NonNull Response<DoorRequest> response) {
                 assert response.body() != null;
-                for (Door door: response.body().getData())
+                for (Door door : response.body().getData())
                     database.DAO().insertDoor(door);
             }
+
             @Override
             public void onFailure(@NonNull Call<DoorRequest> call, @NonNull Throwable t) {
                 Toast.makeText(MainActivity.this, "Данные с камер не получены, проверьте соединение с Интернетом", Toast.LENGTH_SHORT).show();

@@ -52,6 +52,7 @@ public class CamerasRecyclerAdapter extends RecyclerSwipeAdapter<CamerasRecycler
         }
         if (cameraData.get(position).getFavorites()) {
             holder.star.setVisibility(View.VISIBLE);
+            holder.favorite.setImageResource(R.drawable.favorite_button_activate);
         }
 
         holder.favorite.setOnClickListener(new View.OnClickListener() {

@@ -11,20 +11,20 @@
 
     <LinearLayout
         android:id="@+id/left_swipe"
-        android:layout_marginEnd="16dp"
         android:layout_width="55dp"
         android:layout_height="match_parent"
+        android:layout_marginEnd="16dp"
         android:weightSum="1">
 
         <ImageView
             android:id="@+id/favorite"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginStart="9dp"
             android:layout_weight="1"
             android:contentDescription="@string/img_des"
-            android:layout_marginStart="9dp"
-            android:src="@drawable/favorite_button_disactivate"
-            android:gravity="center" />
+            android:gravity="center"
+            android:src="@drawable/favorite_button_disactivate" />
 
     </LinearLayout>
 

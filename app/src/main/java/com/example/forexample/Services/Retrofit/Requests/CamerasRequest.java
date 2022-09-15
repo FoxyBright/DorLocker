@@ -3,6 +3,7 @@ package com.example.forexample.Services.Retrofit.Requests;
 import com.example.forexample.Models.Camera;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class CamerasRequest implements Request {
@@ -18,6 +19,7 @@ public class CamerasRequest implements Request {
 
     private static class Cameras {
         private final List<Camera> cameras = null;
+
         public List<Camera> getCamera() {
             for (Camera camera : cameras)
                 if (camera.getRoom() == null)
