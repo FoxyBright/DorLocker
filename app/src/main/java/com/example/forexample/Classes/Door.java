@@ -1,23 +1,35 @@
 package com.example.forexample.Classes;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import io.realm.RealmObject;
+import java.io.Serializable;
 
-public class Door{
+@Entity
+public class Door implements Serializable {
 
     @SerializedName("name")
     @Expose
+    @ColumnInfo(name = "name")
     private String name;
+
     @SerializedName("id")
     @Expose
+    @PrimaryKey()
     private int id;
+
     @SerializedName("snapshot")
     @Expose
+    @ColumnInfo (name = "snapshot")
     private String snapshot;
+
     @SerializedName("favorites")
     @Expose
+    @ColumnInfo (name = "favorites")
     private Boolean favorites;
 
     public void setSnapshot(String snapshot) {
