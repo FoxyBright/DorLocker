@@ -17,6 +17,7 @@ import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import com.example.forexample.Models.Camera;
 import com.example.forexample.R;
+import com.example.forexample.Services.DataBase.Database;
 
 import java.util.List;
 
@@ -54,12 +55,16 @@ public class CamerasRecyclerAdapter extends RecyclerSwipeAdapter<CamerasRecycler
             holder.star.setVisibility(View.VISIBLE);
             holder.favorite.setImageResource(R.drawable.favorite_button_activate);
         }
-
-        holder.favorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(view.getContext(), "Clicked on Favorite "
-                        + holder.cam_num.getText().toString(), Toast.LENGTH_SHORT).show();
+        Database database = Database.getInstance(context);
+        holder.favorite.setOnClickListener(view -> {
+            if (cameraData.get(position).getFavorites()) {
+                holder.star.setVisibility(View.INVISIBLE);
+                holder.favorite.setImageResource(R.drawable.favorite_button_disactivate);
+                Toast.makeText(view.getContext(), "Камера " + holder.cam_num.getText().toString() + " удалена из Избранного", Toast.LENGTH_SHORT).show();
+            } else {
+                holder.star.setVisibility(View.VISIBLE);
+                holder.favorite.setImageResource(R.drawable.favorite_button_activate);
+                Toast.makeText(view.getContext(), "Камера " + holder.cam_num.getText().toString() + " добавлена в Избранное", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -1,14 +1,18 @@
 package com.example.forexample.Adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
@@ -64,16 +68,25 @@ public class DoorsRecyclerAdapter extends RecyclerSwipeAdapter<DoorsRecyclerAdap
         holder.star.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "Clicked on Favorite "
-                        + holder.door_name.getText().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "Дверь "
+                        + holder.door_name.getText().toString() + " добавлена в Избранное", Toast.LENGTH_SHORT).show();
             }
         });
 
         holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Toast.makeText(view.getContext(), "Clicked on Edit  " + holder.door_name.getText().toString(), Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder editData = new AlertDialog.Builder(context);
+                editData.setTitle("Введите новое имя двери");
+                final EditText doorName = new EditText(context);
+                doorName.setInputType(InputType.TYPE_CLASS_TEXT);
+                editData.setView(doorName);
+                editData.setPositiveButton("Сохранить", (dialogInterface, i) -> {
+                    holder.door_name.setText(doorName.getText().toString());
+                    Toast.makeText(context, "Название двери изменено", Toast.LENGTH_SHORT).show();
+                });
+                editData.setNegativeButton("Отмена", (dialogInterface, i) -> dialogInterface.cancel());
+                editData.show();
             }
         });
 
