@@ -27,9 +27,7 @@ public class DoorsFragment extends Fragment {
 
         RecyclerView recycler = view.findViewById(R.id.recycler);
         TextView empty_view = view.findViewById(R.id.empty_view);
-
         List<Door> doors = Database.getInstance(getActivity()).DAO().getDoors();
-
         if (doors.isEmpty()) {
             recycler.setVisibility(View.GONE);
             empty_view.setVisibility(View.VISIBLE);

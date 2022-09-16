@@ -28,9 +28,7 @@ public class CamerasFragment extends Fragment {
 
         RecyclerView recycler = view.findViewById(R.id.recycler);
         TextView empty_view = view.findViewById(R.id.empty_view);
-
         List<Camera> cameras = Database.getInstance(getActivity()).DAO().getCameras();
-
         if (cameras.isEmpty()) {
             recycler.setVisibility(View.GONE);
             empty_view.setVisibility(View.VISIBLE);

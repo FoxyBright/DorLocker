@@ -1,7 +1,7 @@
 package com.example.forexample.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,8 +44,9 @@ public class DoorsRecyclerAdapter extends RecyclerSwipeAdapter<DoorsRecyclerAdap
         return new ViewHolder(view);
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         holder.door_name.setText(dataDoors.get(position).getName());
         holder.door_locker.setOnClickListener(v -> Toast.makeText(context, "Дверь " + dataDoors.get(holder.getAdapterPosition()).getName() + " открыта", Toast.LENGTH_SHORT).show());
@@ -56,6 +57,9 @@ public class DoorsRecyclerAdapter extends RecyclerSwipeAdapter<DoorsRecyclerAdap
             activity.getSupportFragmentManager().beginTransaction().replace(R.id.main, intercom_frag, "FragmentTransaction").addToBackStack(null).commit();
         });
 
+        if (dataDoors.get(position).getFavorites())
+            holder.star.setImageResource(R.drawable.favorite_button_activate);
+
         if (dataDoors.get(position).getSnapshot() != null) {
             Glide.with(context).load(dataDoors.get(position).getSnapshot()).diskCacheStrategy(DiskCacheStrategy.NONE).into(holder.roundedImageView);
             holder.status_bar.setBackgroundResource(R.drawable.bottom_rounded_corner_rect);
@@ -65,29 +69,32 @@ public class DoorsRecyclerAdapter extends RecyclerSwipeAdapter<DoorsRecyclerAdap
             holder.view.setVisibility(View.VISIBLE);
         }
 
-        holder.star.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        holder.star.setOnClickListener(view -> {
+            if (dataDoors.get(position).getFavorites()) {
+                holder.star.setImageResource(R.drawable.favorite_button_disactivate);
+                Toast.makeText(view.getContext(), "Дверь "
+                        + holder.door_name.getText().toString() + " удалена из Избранного", Toast.LENGTH_SHORT).show();
+            } else {
+                holder.star.setImageResource(R.drawable.favorite_button_activate);
                 Toast.makeText(view.getContext(), "Дверь "
                         + holder.door_name.getText().toString() + " добавлена в Избранное", Toast.LENGTH_SHORT).show();
             }
         });
 
-        holder.edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder editData = new AlertDialog.Builder(context);
-                editData.setTitle("Введите новое имя двери");
-                final EditText doorName = new EditText(context);
-                doorName.setInputType(InputType.TYPE_CLASS_TEXT);
-                editData.setView(doorName);
-                editData.setPositiveButton("Сохранить", (dialogInterface, i) -> {
-                    holder.door_name.setText(doorName.getText().toString());
-                    Toast.makeText(context, "Название двери изменено", Toast.LENGTH_SHORT).show();
-                });
-                editData.setNegativeButton("Отмена", (dialogInterface, i) -> dialogInterface.cancel());
-                editData.show();
-            }
+        holder.edit.setOnClickListener(view -> {
+            AlertDialog.Builder editData = new AlertDialog.Builder(context, R.style.AlertDialogTheme);
+            editData.setTitle("Введите новое имя двери");
+            final EditText doorName = new EditText(context);
+            doorName.setInputType(InputType.TYPE_CLASS_TEXT);
+            doorName.setTextColor(R.color.text_color);
+            doorName.setText(holder.door_name.getText().toString());
+            editData.setView(doorName);
+            editData.setPositiveButton("Сохранить", (dialogInterface, i) -> {
+                holder.door_name.setText(doorName.getText().toString());
+                Toast.makeText(context, "Название двери изменено", Toast.LENGTH_SHORT).show();
+            });
+            editData.setNegativeButton("Отмена", (dialogInterface, i) -> dialogInterface.cancel());
+            editData.show();
         });
 
         holder.swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);

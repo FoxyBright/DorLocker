@@ -17,7 +17,6 @@ import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import com.example.forexample.Models.Camera;
 import com.example.forexample.R;
-import com.example.forexample.Services.DataBase.Database;
 
 import java.util.List;
 
@@ -43,11 +42,12 @@ public class CamerasRecyclerAdapter extends RecyclerSwipeAdapter<CamerasRecycler
         holder.roundedImageView.setClipToOutline(true);
         holder.room_name.setText(cameraData.get(position).getRoom());
         holder.room_name.setVisibility(View.VISIBLE);
-
         holder.cam_num.setText(cameraData.get(position).getName());
+
         Glide.with(context).load(cameraData.get(position).getSnapshot())
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(holder.roundedImageView);
+
         if (cameraData.get(position).getRec()) {
             holder.rec.setVisibility(View.VISIBLE);
         }
@@ -55,7 +55,7 @@ public class CamerasRecyclerAdapter extends RecyclerSwipeAdapter<CamerasRecycler
             holder.star.setVisibility(View.VISIBLE);
             holder.favorite.setImageResource(R.drawable.favorite_button_activate);
         }
-        Database database = Database.getInstance(context);
+
         holder.favorite.setOnClickListener(view -> {
             if (cameraData.get(position).getFavorites()) {
                 holder.star.setVisibility(View.INVISIBLE);
@@ -84,7 +84,6 @@ public class CamerasRecyclerAdapter extends RecyclerSwipeAdapter<CamerasRecycler
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-
         TextView room_name;
         TextView cam_num;
         ImageView play_button;

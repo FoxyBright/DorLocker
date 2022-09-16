@@ -30,14 +30,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         CustomViewPager viewPager = binding.viewPager;
-        viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = binding.tabs;
+        viewPager.setAdapter(sectionsPagerAdapter);
         viewPager.setEnableSwipe(false);
         viewPager.beginFakeDrag();
         tabs.setupWithViewPager(viewPager);
+
         Database database = Database.getInstance(this);
+
         Call<CamerasRequest> getCamerasCall = RetrofitAPI.getInstance().getAPI().getCameras();
         getCamerasCall.enqueue(new Callback<CamerasRequest>() {
             @Override
@@ -49,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<CamerasRequest> call, @NonNull Throwable t) {
-                Toast.makeText(MainActivity.this, "Данные с камер не получены, проверьте соединение с Интернетом", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, R.string.not_cameras, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -64,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<DoorRequest> call, @NonNull Throwable t) {
-                Toast.makeText(MainActivity.this, "Данные с камер не получены, проверьте соединение с Интернетом", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, R.string.not_doors, Toast.LENGTH_SHORT).show();
             }
         });
     }
