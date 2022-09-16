@@ -11,7 +11,6 @@ import com.example.forexample.Services.Retrofit.Requests.DoorRequest;
 import com.example.forexample.Services.Retrofit.RetrofitAPI;
 import com.example.forexample.databinding.ActivityMainBinding;
 import com.example.forexample.UI.CustomViewPager;
-import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +20,6 @@ import com.example.forexample.UI.SectionsPagerAdapter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 
 public class MainActivity extends AppCompatActivity {
 

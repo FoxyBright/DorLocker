@@ -13,6 +13,9 @@ import android.view.ViewGroup;
 import com.daimajia.swipe.util.Attributes;
 import com.example.forexample.Adapters.DoorsRecyclerAdapter;
 import com.example.forexample.R;
+import com.example.forexample.Services.DataBase.Database;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 
 public class DoorsFragment extends Fragment {
 
@@ -22,9 +25,12 @@ public class DoorsFragment extends Fragment {
 
         RecyclerView recycler = view.findViewById(R.id.recycler);
         recycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        DoorsRecyclerAdapter adapter = new DoorsRecyclerAdapter(getActivity());
-        ((DoorsRecyclerAdapter) adapter).setMode(Attributes.Mode.Single);
-        recycler.setAdapter(adapter);
+
+        Database.getInstance(getActivity()).DAO().getDoors().observeOn(AndroidSchedulers.mainThread()).subscribe(doors -> {
+            DoorsRecyclerAdapter adapter = new DoorsRecyclerAdapter(getActivity(), doors);
+            ((DoorsRecyclerAdapter) adapter).setMode(Attributes.Mode.Single);
+            recycler.setAdapter(adapter);
+        });
 
         return view;
     }

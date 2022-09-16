@@ -24,7 +24,6 @@ import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import com.example.forexample.Models.Door;
 import com.example.forexample.Fragments.IntercomFragment;
 import com.example.forexample.R;
-import com.example.forexample.Services.DataBase.Database;
 
 import java.util.List;
 
@@ -33,9 +32,9 @@ public class DoorsRecyclerAdapter extends RecyclerSwipeAdapter<DoorsRecyclerAdap
     Context context;
     List<Door> dataDoors;
 
-    public DoorsRecyclerAdapter(Context context) {
+    public DoorsRecyclerAdapter(Context context, List<Door> dataDoors) {
         this.context = context;
-        this.dataDoors = Database.getInstance(context).DAO().getDoors();
+        this.dataDoors = dataDoors;
     }
 
     @NonNull

@@ -13,6 +13,9 @@ import android.view.ViewGroup;
 import com.daimajia.swipe.util.Attributes;
 import com.example.forexample.Adapters.CamerasRecyclerAdapter;
 import com.example.forexample.R;
+import com.example.forexample.Services.DataBase.Database;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 
 public class CamerasFragment extends Fragment {
 
@@ -22,9 +25,12 @@ public class CamerasFragment extends Fragment {
 
         RecyclerView recycler = view.findViewById(R.id.recycler);
         recycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        CamerasRecyclerAdapter adapter = new CamerasRecyclerAdapter(getActivity());
-        ((CamerasRecyclerAdapter) adapter).setMode(Attributes.Mode.Single);
-        recycler.setAdapter(adapter);
+
+        Database.getInstance(getActivity()).DAO().getCameras().observeOn(AndroidSchedulers.mainThread()).subscribe(cameras -> {
+            CamerasRecyclerAdapter adapter = new CamerasRecyclerAdapter(getActivity(), cameras);
+            ((CamerasRecyclerAdapter) adapter).setMode(Attributes.Mode.Single);
+            recycler.setAdapter(adapter);
+        });
 
         return view;
     }

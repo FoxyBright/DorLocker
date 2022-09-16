@@ -11,6 +11,9 @@ import com.example.forexample.Models.Door;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Flowable;
+
+
 @Dao
 public interface DAO {
 
@@ -18,11 +21,11 @@ public interface DAO {
     void insertCamera(Camera camera);
 
     @Query("SELECT * FROM Camera")
-    List<Camera> getCameras();
+    Flowable<List<Camera>> getCameras();
 
     @Insert(onConflict = REPLACE)
     void insertDoor(Door door);
 
     @Query("SELECT * FROM Door")
-    List<Door> getDoors();
+    Flowable<List<Door>> getDoors();
 }

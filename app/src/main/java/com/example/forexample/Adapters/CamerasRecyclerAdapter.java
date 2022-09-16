@@ -17,8 +17,6 @@ import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import com.example.forexample.Models.Camera;
 import com.example.forexample.R;
-import com.example.forexample.Services.DataBase.Database;
-
 import java.util.List;
 
 public class CamerasRecyclerAdapter extends RecyclerSwipeAdapter<CamerasRecyclerAdapter.ViewHolder> {
@@ -26,9 +24,9 @@ public class CamerasRecyclerAdapter extends RecyclerSwipeAdapter<CamerasRecycler
     Context context;
     List<Camera> cameraData;
 
-    public CamerasRecyclerAdapter(Context context) {
+    public CamerasRecyclerAdapter(Context context, List<Camera> cameraData) {
         this.context = context;
-        this.cameraData = Database.getInstance(context).DAO().getCameras();;
+        this.cameraData = cameraData;
     }
 
     @NonNull
