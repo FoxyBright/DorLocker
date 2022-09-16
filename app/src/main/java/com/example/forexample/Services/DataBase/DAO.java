@@ -28,4 +28,13 @@ public interface DAO {
 
     @Query("SELECT * FROM Door")
     Flowable<List<Door>> getDoors();
+
+    @Query("UPDATE Camera SET favorites = :favorite WHERE id = :id")
+    void setCameraFavorite(int id, Boolean favorite);
+
+    @Query("UPDATE Door SET favorites = :favorite WHERE id = :id")
+    void setDoorFavorite(int id, Boolean favorite);
+
+    @Query("UPDATE Door SET name = :name WHERE id = :id")
+    void setDoorName(int id, String name);
 }

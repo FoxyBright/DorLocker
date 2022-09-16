@@ -24,17 +24,18 @@ import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import com.example.forexample.Models.Door;
 import com.example.forexample.Fragments.IntercomFragment;
 import com.example.forexample.R;
+import com.example.forexample.Services.DataBase.Database;
 
 import java.util.List;
 
 public class DoorsRecyclerAdapter extends RecyclerSwipeAdapter<DoorsRecyclerAdapter.ViewHolder> {
 
     Context context;
-    List<Door> dataDoors;
+    List<Door> doors;
 
-    public DoorsRecyclerAdapter(Context context, List<Door> dataDoors) {
+    public DoorsRecyclerAdapter(Context context, List<Door> doors) {
         this.context = context;
-        this.dataDoors = dataDoors;
+        this.doors = doors;
     }
 
     @NonNull
@@ -48,8 +49,8 @@ public class DoorsRecyclerAdapter extends RecyclerSwipeAdapter<DoorsRecyclerAdap
     @Override
     public void onBindViewHolder(final ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-        holder.door_name.setText(dataDoors.get(position).getName());
-        holder.door_locker.setOnClickListener(v -> Toast.makeText(context, "Дверь " + dataDoors.get(holder.getAdapterPosition()).getName() + " открыта", Toast.LENGTH_SHORT).show());
+        holder.door_name.setText(doors.get(position).getName());
+        holder.door_locker.setOnClickListener(v -> Toast.makeText(context, "Дверь " + doors.get(holder.getAdapterPosition()).getName() + " открыта", Toast.LENGTH_SHORT).show());
 
         holder.play_button.setOnClickListener(v -> {
             AppCompatActivity activity = (AppCompatActivity) v.getContext();
@@ -57,27 +58,25 @@ public class DoorsRecyclerAdapter extends RecyclerSwipeAdapter<DoorsRecyclerAdap
             activity.getSupportFragmentManager().beginTransaction().replace(R.id.main, intercom_frag, "FragmentTransaction").addToBackStack(null).commit();
         });
 
-        if (dataDoors.get(position).getFavorites())
+        if (doors.get(position).getFavorites())
             holder.star.setImageResource(R.drawable.favorite_button_activate);
 
-        if (dataDoors.get(position).getSnapshot() != null) {
-            Glide.with(context).load(dataDoors.get(position).getSnapshot()).diskCacheStrategy(DiskCacheStrategy.NONE).into(holder.roundedImageView);
+        if (doors.get(position).getSnapshot() != null) {
+            Glide.with(context).load(doors.get(position).getSnapshot()).diskCacheStrategy(DiskCacheStrategy.NONE).into(holder.roundedImageView);
             holder.status_bar.setBackgroundResource(R.drawable.bottom_rounded_corner_rect);
             holder.cam_video.setVisibility(View.VISIBLE);
             holder.status_network.setVisibility(View.VISIBLE);
             holder.roundedImageView.setClipToOutline(true);
             holder.view.setVisibility(View.VISIBLE);
         }
-
+        Database db = Database.getInstance(context);
         holder.star.setOnClickListener(view -> {
-            if (dataDoors.get(position).getFavorites()) {
-                holder.star.setImageResource(R.drawable.favorite_button_disactivate);
-                Toast.makeText(view.getContext(), "Дверь "
-                        + holder.door_name.getText().toString() + " удалена из Избранного", Toast.LENGTH_SHORT).show();
+            if (doors.get(position).getFavorites()) {
+                db.DAO().setDoorFavorite(doors.get(position).getId(), false);
+                Toast.makeText(view.getContext(), "Дверь " + holder.door_name.getText().toString() + " удалена из Избранного", Toast.LENGTH_SHORT).show();
             } else {
-                holder.star.setImageResource(R.drawable.favorite_button_activate);
-                Toast.makeText(view.getContext(), "Дверь "
-                        + holder.door_name.getText().toString() + " добавлена в Избранное", Toast.LENGTH_SHORT).show();
+                db.DAO().setDoorFavorite(doors.get(position).getId(), true);
+                Toast.makeText(view.getContext(), "Дверь " + holder.door_name.getText().toString() + " добавлена в Избранное", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -90,7 +89,7 @@ public class DoorsRecyclerAdapter extends RecyclerSwipeAdapter<DoorsRecyclerAdap
             doorName.setText(holder.door_name.getText().toString());
             editData.setView(doorName);
             editData.setPositiveButton("Сохранить", (dialogInterface, i) -> {
-                holder.door_name.setText(doorName.getText().toString());
+                db.DAO().setDoorName(doors.get(position).getId(), doorName.getText().toString());
                 Toast.makeText(context, "Название двери изменено", Toast.LENGTH_SHORT).show();
             });
             editData.setNegativeButton("Отмена", (dialogInterface, i) -> dialogInterface.cancel());
@@ -104,7 +103,7 @@ public class DoorsRecyclerAdapter extends RecyclerSwipeAdapter<DoorsRecyclerAdap
 
     @Override
     public int getItemCount() {
-        return dataDoors.size();
+        return doors.size();
     }
 
     @Override

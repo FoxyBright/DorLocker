@@ -17,16 +17,18 @@ import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import com.example.forexample.Models.Camera;
 import com.example.forexample.R;
+import com.example.forexample.Services.DataBase.Database;
+
 import java.util.List;
 
 public class CamerasRecyclerAdapter extends RecyclerSwipeAdapter<CamerasRecyclerAdapter.ViewHolder> {
 
     Context context;
-    List<Camera> cameraData;
+    List<Camera> camera;
 
-    public CamerasRecyclerAdapter(Context context, List<Camera> cameraData) {
+    public CamerasRecyclerAdapter(Context context, List<Camera> camera) {
         this.context = context;
-        this.cameraData = cameraData;
+        this.camera = camera;
     }
 
     @NonNull
@@ -39,28 +41,27 @@ public class CamerasRecyclerAdapter extends RecyclerSwipeAdapter<CamerasRecycler
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.roundedImageView.setClipToOutline(true);
-        holder.room_name.setText(cameraData.get(position).getRoom());
+        holder.room_name.setText(camera.get(position).getRoom());
         holder.room_name.setVisibility(View.VISIBLE);
 
-        holder.cam_num.setText(cameraData.get(position).getName());
-        Glide.with(context).load(cameraData.get(position).getSnapshot())
+        holder.cam_num.setText(camera.get(position).getName());
+        Glide.with(context).load(camera.get(position).getSnapshot())
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(holder.roundedImageView);
-        if (cameraData.get(position).getRec()) {
+        if (camera.get(position).getRec()) {
             holder.rec.setVisibility(View.VISIBLE);
         }
-        if (cameraData.get(position).getFavorites()) {
+        if (camera.get(position).getFavorites()) {
             holder.star.setVisibility(View.VISIBLE);
             holder.favorite.setImageResource(R.drawable.favorite_button_activate);
         }
+        Database db = Database.getInstance(context);
         holder.favorite.setOnClickListener(view -> {
-            if (cameraData.get(position).getFavorites()) {
-                holder.star.setVisibility(View.INVISIBLE);
-                holder.favorite.setImageResource(R.drawable.favorite_button_disactivate);
+            if (camera.get(position).getFavorites()) {
+                db.DAO().setCameraFavorite(camera.get(position).getId(), false);
                 Toast.makeText(view.getContext(), "Камера " + holder.cam_num.getText().toString() + " удалена из Избранного", Toast.LENGTH_SHORT).show();
             } else {
-                holder.star.setVisibility(View.VISIBLE);
-                holder.favorite.setImageResource(R.drawable.favorite_button_activate);
+                db.DAO().setCameraFavorite(camera.get(position).getId(), true);
                 Toast.makeText(view.getContext(), "Камера " + holder.cam_num.getText().toString() + " добавлена в Избранное", Toast.LENGTH_SHORT).show();
             }
         });
@@ -72,7 +73,7 @@ public class CamerasRecyclerAdapter extends RecyclerSwipeAdapter<CamerasRecycler
 
     @Override
     public int getItemCount() {
-        return cameraData.size();
+        return camera.size();
     }
 
     @Override
