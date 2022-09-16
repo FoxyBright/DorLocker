@@ -33,11 +33,10 @@ public class MainActivity extends AppCompatActivity {
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         CustomViewPager viewPager = binding.viewPager;
-        TabLayout tabs = binding.tabs;
         viewPager.setAdapter(sectionsPagerAdapter);
         viewPager.setEnableSwipe(false);
         viewPager.beginFakeDrag();
-        tabs.setupWithViewPager(viewPager);
+        binding.tabs.setupWithViewPager(viewPager);
 
         Database database = Database.getInstance(this);
 
