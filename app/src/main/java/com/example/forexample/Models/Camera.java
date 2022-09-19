@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 import com.example.forexample.Services.Retrofit.Response.CamerasResponse;
 import com.example.forexample.Services.Retrofit.RetrofitAPI;
 
+import java.util.Objects;
+
 import io.realm.Realm;
 import io.realm.RealmObject;
 import retrofit2.Call;
@@ -96,8 +98,14 @@ public class Camera extends RealmObject {
 
             @Override
             public void onFailure(@NonNull Call<CamerasResponse> call, @NonNull Throwable t) {
-                Log.d("Error", "Doors get data failed");
+                Log.d("Error", "Camera get data failed");
             }
         });
+    }
+
+    public void cameraFavoriteSet(int id, Boolean favorites){
+        Realm realm = Realm.getDefaultInstance();
+        realm.executeTransactionAsync(realm1 -> Objects.requireNonNull(realm1.where(Camera.class).equalTo("id", id).findFirst()).setFavorites(favorites));
+        realm.close();
     }
 }

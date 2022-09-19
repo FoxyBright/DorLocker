@@ -4,12 +4,11 @@ import android.os.Bundle;
 
 import com.example.forexample.Models.Camera;
 import com.example.forexample.Models.Door;
-import com.example.forexample.databinding.ActivityMainBinding;
-import com.example.forexample.UI.CustomViewPager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.forexample.UI.SectionsPagerAdapter;
+import com.example.forexample.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,13 +17,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
-        CustomViewPager viewPager = binding.viewPager;
-        viewPager.setAdapter(sectionsPagerAdapter);
-        viewPager.setEnableSwipe(false);
-        viewPager.beginFakeDrag();
-        binding.tabs.setupWithViewPager(viewPager);
+        binding.tabs.setupWithViewPager(new SectionsPagerAdapter(
+                this, getSupportFragmentManager()).getViewPager(binding.viewPager));
 
         Camera camera = new Camera();
         camera.getCameras();

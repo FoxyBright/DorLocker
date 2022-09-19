@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 import com.example.forexample.Services.Retrofit.Response.DoorResponse;
 import com.example.forexample.Services.Retrofit.RetrofitAPI;
 
+import java.util.Objects;
+
 import io.realm.Realm;
 import io.realm.RealmObject;
 import retrofit2.Call;
@@ -82,12 +84,13 @@ public class Door extends RealmObject {
 
     public void renamedDoor(int id, String name){
         Realm realm = Realm.getDefaultInstance();
-        realm.executeTransactionAsync(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                realm.where(Door.class).equalTo("id", id).findFirst().setName(name);
-            }
-        });
+        realm.executeTransactionAsync(realm1 -> Objects.requireNonNull(realm1.where(Door.class).equalTo("id", id).findFirst()).setName(name));
+        realm.close();
+    }
+
+    public void doorFavoriteSet(int id, Boolean favorites){
+        Realm realm = Realm.getDefaultInstance();
+        realm.executeTransactionAsync(realm1 -> Objects.requireNonNull(realm1.where(Door.class).equalTo("id", id).findFirst()).setFavorites(favorites));
         realm.close();
     }
 }

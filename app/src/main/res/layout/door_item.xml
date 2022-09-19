@@ -10,7 +10,7 @@
     android:gravity="center_horizontal">
 
     <LinearLayout
-        android:id="@+id/left_swipe"
+        android:id="@+id/leftSwipe"
         android:layout_width="110dp"
         android:layout_height="match_parent"
         android:layout_marginEnd="16dp"
@@ -22,7 +22,6 @@
             android:layout_height="match_parent"
             android:layout_marginStart="9dp"
             android:layout_weight="1"
-            android:contentDescription="@string/img_des"
             android:gravity="center"
             android:src="@drawable/edit_pencil" />
 
@@ -32,7 +31,6 @@
             android:layout_height="match_parent"
             android:layout_marginStart="9dp"
             android:layout_weight="1"
-            android:contentDescription="@string/img_des"
             android:gravity="center"
             android:src="@drawable/favorite_button_disactivate" />
 
@@ -44,7 +42,7 @@
         android:layout_marginTop="16dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cam_video"
+            android:id="@+id/camVideo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -58,7 +56,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:background="@drawable/rounded_corner_rect"
-                android:contentDescription="@string/img_des"
                 android:scaleType="centerCrop"
                 android:src="@drawable/test_img"
                 app:layout_constraintBaseline_toTopOf="parent"
@@ -69,22 +66,25 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_margin="3dp"
-                android:contentDescription="@string/img_des"
                 android:src="@drawable/star"
                 android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/play_button"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="70dp"
-                android:layout_marginEnd="160dp"
-                android:contentDescription="@string/img_des"
-                android:src="@drawable/play_button"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="190dp"
+                android:gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/play_button"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/play_button"/>
+
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -100,14 +100,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/status_bar"
+            android:id="@+id/statusBar"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginHorizontal="16dp"
             android:background="@drawable/rounded_corner_rect"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cam_video">
+            app:layout_constraintTop_toBottomOf="@+id/camVideo">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -120,16 +120,15 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/door_name"
+                    android:id="@+id/doorName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/circe_regular"
-                    android:text="@string/intercom"
                     android:textColor="@color/text_color"
                     android:textSize="17sp" />
 
                 <TextView
-                    android:id="@+id/status_network"
+                    android:id="@+id/statusNetwork"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/circe_regular"
@@ -141,12 +140,11 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/door_locker"
+                android:id="@+id/doorLocker"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
-                android:contentDescription="@string/img_des"
                 android:src="@drawable/lock"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

@@ -15,7 +15,7 @@
         android:layout_marginTop="28dp"
         android:layout_marginBottom="18dp"
         android:fontFamily="@font/circe_regular"
-        android:text="@string/common_intercom"
+        android:text="@string/commonIntercom"
         android:textColor="@color/headers_color"
         android:textSize="21sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -35,7 +35,6 @@
             android:layout_height="24dp"
             android:layout_marginTop="9dp"
             android:layout_marginEnd="8dp"
-            android:contentDescription="@string/img_des"
             android:src="@drawable/eye"
             app:layout_constraintEnd_toStartOf="@+id/visitors"
             app:layout_constraintTop_toTopOf="parent" />
@@ -46,7 +45,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="11dp"
             android:layout_marginEnd="16dp"
-            android:contentDescription="@string/img_des"
             android:fontFamily="@font/circe_regular"
             android:text="@string/visitors"
             android:textColor="@color/white"
@@ -54,12 +52,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/rec_point"
+            android:id="@+id/recPoint"
             android:layout_width="14dp"
             android:layout_height="14dp"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="8dp"
-            android:contentDescription="@string/img_des"
             android:src="@drawable/record_red_circle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -68,19 +65,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="11dp"
-            android:contentDescription="@string/img_des"
             android:fontFamily="@font/circe_regular"
-            android:text="@string/live_broadcast"
+            android:text="@string/liveBroadcast"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/rec_point" />
+            app:layout_constraintStart_toEndOf="@+id/recPoint" />
 
         <ImageView
-            android:id="@+id/size_change_button"
+            android:id="@+id/sizeChangeButton"
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_marginEnd="16dp"
-            android:contentDescription="@string/img_des"
             android:src="@drawable/change_video_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -92,7 +87,7 @@
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/open_door_button"
+            android:id="@+id/openDoorButton"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginHorizontal="16dp"
@@ -102,7 +97,7 @@
             android:fontFamily="@font/circe_regular"
             android:paddingTop="24dp"
             android:paddingBottom="12dp"
-            android:text="@string/open_door"
+            android:text="@string/openDoor"
             android:textAllCaps="false"
             android:textColor="@color/network_color"
             app:layout_constraintBottom_toTopOf="@+id/settings"
@@ -122,7 +117,6 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="10dp"
-                android:contentDescription="@string/img_des"
                 android:src="@drawable/top_arrow" />
 
             <TextView
@@ -137,23 +131,21 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/back_button"
+            android:id="@+id/backButton"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="30dp"
-            android:contentDescription="@string/img_des"
             android:src="@drawable/back_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
-            android:id="@+id/crossed_out_eye_button"
+            android:id="@+id/crossedOutEyeButton"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="30dp"
-            android:contentDescription="@string/img_des"
             android:src="@drawable/crossed_out_eye"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

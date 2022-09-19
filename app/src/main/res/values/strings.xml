@@ -1,21 +1,19 @@
 <resources>
-    <string name="app_name">Doors Opener</string>
-    <string name="tab_text_1">Камеры</string>
-    <string name="tab_text_2">Двери</string>
-    <string name="my_home">Мой дом</string>
-    <string name="room_name">Название комнаты</string>
-    <string name="cam_num">Камера №X</string>
+    <string name="appName">Doors Opener</string>
+    <string name="cameras">Камеры</string>
+    <string name="doors">Двери</string>
+    <string name="myHome">Мой дом</string>
     <string name="door_name">Дверь</string>
-    <string name="img_des">Картинка</string>
-    <string name="settings_des">Настройки приложения \n (Ждите в следующем обновлении)</string>
-    <string name="intercom">Домофон</string>
+    <string name="settingsDes">Настройки приложения \n (Ждите в следующем обновлении)</string>
     <string name="network">В сети</string>
-    <string name="common_intercom">Домофон общедомовой</string>
+    <string name="commonIntercom">Домофон общедомовой</string>
     <string name="settings">Настройки</string>
-    <string name="open_door">Открыть дверь</string>
-    <string name="live_broadcast">Прямая \nтрансляция</string>
+    <string name="openDoor">Открыть дверь</string>
+    <string name="liveBroadcast">Прямая \nтрансляция</string>
     <string name="visitors">2</string>
     <string name="empty">Данные отсутствуют, \n проверьте соединение с Интернетом</string>
-    <string name="not_cameras">Данные о камерах не получены, \n проверьте соединение с Интернетом</string>
-    <string name="not_doors">Данные о дверях не получены, \n проверьте соединение с Интернетом</string>
+    <string name="newDoorName">Введите новое имя двери</string>
+    <string name="doorNameChanged">Название двери изменено</string>
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отмена</string>
 </resources>

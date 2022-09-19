@@ -23,11 +23,13 @@ import java.util.List;
 public class CamerasRecyclerAdapter extends RecyclerSwipeAdapter<CamerasRecyclerAdapter.ViewHolder> {
 
     Context context;
-    List<Camera> camera;
+    List<Camera> cameras;
+    Camera cameraSettings;
 
-    public CamerasRecyclerAdapter(Context context, List<Camera> camera) {
+    public CamerasRecyclerAdapter(Context context, List<Camera> cameras) {
         this.context = context;
-        this.camera = camera;
+        this.cameras = cameras;
+        this.cameraSettings = new Camera();
     }
 
     @NonNull
@@ -40,44 +42,43 @@ public class CamerasRecyclerAdapter extends RecyclerSwipeAdapter<CamerasRecycler
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.roundedImageView.setClipToOutline(true);
-        holder.room_name.setText(camera.get(position).getRoom());
+        holder.room_name.setText(cameras.get(position).getRoom());
         holder.room_name.setVisibility(View.VISIBLE);
 
-        holder.cam_num.setText(camera.get(position).getName());
-        Glide.with(context).load(camera.get(position).getSnapshot())
+        holder.cam_num.setText(cameras.get(position).getName());
+        Glide.with(context).load(cameras.get(position).getSnapshot())
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(holder.roundedImageView);
-        if (camera.get(position).getRec()) {
+        if (cameras.get(position).getRec()) {
             holder.rec.setVisibility(View.VISIBLE);
         }
-        if (camera.get(position).getFavorites()) {
+        if (cameras.get(position).getFavorites()) {
             holder.star.setVisibility(View.VISIBLE);
             holder.favorite.setImageResource(R.drawable.favorite_button_activate);
         }
-//        Database db = Database.getInstance(context);
         holder.favorite.setOnClickListener(view -> {
-            if (camera.get(position).getFavorites()) {
-//                db.DAO().setCameraFavorite(camera.get(position).getId(), false);
+            if (cameras.get(position).getFavorites()) {
+                cameraSettings.cameraFavoriteSet(cameras.get(position).getId(), false);
                 Toast.makeText(view.getContext(), "Камера " + holder.cam_num.getText().toString() + " удалена из Избранного", Toast.LENGTH_SHORT).show();
             } else {
-//                db.DAO().setCameraFavorite(camera.get(position).getId(), true);
-                Toast.makeText(view.getContext(), "Камера " + holder.cam_num.getText().toString() + " добавлена в Избранное", Toast.LENGTH_SHORT).show();
+                cameraSettings.cameraFavoriteSet(cameras.get(position).getId(), true);
+                Toast.makeText(view.getContext(), "Камера " + holder.cam_num.getText().toString() +  " добавлена в Избранное", Toast.LENGTH_SHORT).show();
             }
         });
 
         holder.swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
-        holder.swipeLayout.addDrag(SwipeLayout.DragEdge.Right, holder.swipeLayout.findViewById(R.id.left_swipe));
+        holder.swipeLayout.addDrag(SwipeLayout.DragEdge.Right, holder.swipeLayout.findViewById(R.id.leftSwipe));
         mItemManger.bindView(holder.itemView, position);
     }
 
     @Override
     public int getItemCount() {
-        return camera.size();
+        return cameras.size();
     }
 
     @Override
     public int getSwipeLayoutResourceId(int position) {
-        return R.id.cam_swipe;
+        return R.id.camSwipe;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -100,7 +101,7 @@ public class CamerasRecyclerAdapter extends RecyclerSwipeAdapter<CamerasRecycler
             roundedImageView = itemView.findViewById(R.id.roundedImageView);
             cam_num = itemView.findViewById(R.id.cam_num);
             room_name = itemView.findViewById(R.id.room_name);
-            swipeLayout = itemView.findViewById(R.id.cam_swipe);
+            swipeLayout = itemView.findViewById(R.id.camSwipe);
         }
     }
 }

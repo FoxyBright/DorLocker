@@ -22,7 +22,7 @@ import java.util.Objects;
 
 public class IntercomFragment extends Fragment {
 
-    Button open_door;
+    Button openDoor;
     LinearLayout settings;
     ImageView back_button;
     ImageView crossed_out_eye_button;
@@ -30,11 +30,11 @@ public class IntercomFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_intercom, container, false);
-        open_door = view.findViewById(R.id.open_door_button);
-        back_button = view.findViewById(R.id.back_button);
+        openDoor = view.findViewById(R.id.openDoorButton);
+        back_button = view.findViewById(R.id.backButton);
         settings = view.findViewById(R.id.settings);
-        crossed_out_eye_button = view.findViewById(R.id.crossed_out_eye_button);
-        open_door.setOnClickListener(v -> Toast.makeText(getActivity(), "Дверь открыта", Toast.LENGTH_SHORT).show());
+        crossed_out_eye_button = view.findViewById(R.id.crossedOutEyeButton);
+        openDoor.setOnClickListener(v -> Toast.makeText(getActivity(), "Дверь открыта", Toast.LENGTH_SHORT).show());
         back_button.setOnClickListener(v -> {
             FragmentManager manager = getFragmentManager();
             assert manager != null;

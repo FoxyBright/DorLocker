@@ -1,5 +1,6 @@
 package com.example.forexample.UI;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -29,6 +30,7 @@ public class CustomViewPager extends ViewPager {
         return enableSwipe && super.onInterceptTouchEvent(event);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         return enableSwipe && super.onTouchEvent(event);

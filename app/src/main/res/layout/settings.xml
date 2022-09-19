@@ -20,7 +20,7 @@
         android:layout_gravity="center"
         android:fontFamily="@font/circe_regular"
         android:gravity="center"
-        android:text="@string/settings_des"
+        android:text="@string/settingsDes"
         android:textColor="@color/text_color"
         android:textSize="20sp" />
 

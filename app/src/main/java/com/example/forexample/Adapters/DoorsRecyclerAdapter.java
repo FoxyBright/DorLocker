@@ -31,10 +31,12 @@ public class DoorsRecyclerAdapter extends RecyclerSwipeAdapter<DoorsRecyclerAdap
 
     Context context;
     List<Door> doors;
+    Door doorSettings;
 
     public DoorsRecyclerAdapter(Context context, List<Door> doors) {
         this.context = context;
         this.doors = doors;
+        this.doorSettings = new Door();
     }
 
     @NonNull
@@ -70,32 +72,31 @@ public class DoorsRecyclerAdapter extends RecyclerSwipeAdapter<DoorsRecyclerAdap
         }
         holder.star.setOnClickListener(view -> {
             if (doors.get(position).getFavorites()) {
-//                db.DAO().setDoorFavorite(doors.get(position).getId(), false);
+                doorSettings.doorFavoriteSet(doors.get(position).getId(), false);
                 Toast.makeText(view.getContext(), "Дверь " + holder.door_name.getText().toString() + " удалена из Избранного", Toast.LENGTH_SHORT).show();
             } else {
-//                db.DAO().setDoorFavorite(doors.get(position).getId(), true);
+                doorSettings.doorFavoriteSet(doors.get(position).getId(), true);
                 Toast.makeText(view.getContext(), "Дверь " + holder.door_name.getText().toString() + " добавлена в Избранное", Toast.LENGTH_SHORT).show();
             }
         });
         holder.edit.setOnClickListener(view -> {
             AlertDialog.Builder editData = new AlertDialog.Builder(context, R.style.AlertDialogTheme);
-            editData.setTitle("Введите новое имя двери");
+            editData.setTitle(R.string.newDoorName);
             final EditText doorName = new EditText(context);
             doorName.setInputType(InputType.TYPE_CLASS_TEXT);
             doorName.setTextColor(R.color.text_color);
             doorName.setText(holder.door_name.getText().toString());
             editData.setView(doorName);
-            editData.setPositiveButton("Сохранить", (dialogInterface, i) -> {
-                Door door = new Door();
-                door.renamedDoor(doors.get(position).getId(), doorName.getText().toString());
-                Toast.makeText(context, "Название двери изменено", Toast.LENGTH_SHORT).show();
+            editData.setPositiveButton(R.string.save, (dialogInterface, i) -> {
+                doorSettings.renamedDoor(doors.get(position).getId(), doorName.getText().toString());
+                Toast.makeText(context, R.string.doorNameChanged, Toast.LENGTH_SHORT).show();
             });
-            editData.setNegativeButton("Отмена", (dialogInterface, i) -> dialogInterface.cancel());
+            editData.setNegativeButton(R.string.cancel, (dialogInterface, i) -> dialogInterface.cancel());
             editData.show();
         });
 
         holder.swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
-        holder.swipeLayout.addDrag(SwipeLayout.DragEdge.Right, holder.swipeLayout.findViewById(R.id.left_swipe));
+        holder.swipeLayout.addDrag(SwipeLayout.DragEdge.Right, holder.swipeLayout.findViewById(R.id.leftSwipe));
         mItemManger.bindView(holder.itemView, position);
     }
 
@@ -125,12 +126,12 @@ public class DoorsRecyclerAdapter extends RecyclerSwipeAdapter<DoorsRecyclerAdap
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             roundedImageView = itemView.findViewById(R.id.roundedImageView);
-            door_name = itemView.findViewById(R.id.door_name);
-            status_network = itemView.findViewById(R.id.status_network);
-            door_locker = itemView.findViewById(R.id.door_locker);
+            door_name = itemView.findViewById(R.id.doorName);
+            status_network = itemView.findViewById(R.id.statusNetwork);
+            door_locker = itemView.findViewById(R.id.doorLocker);
             play_button = itemView.findViewById(R.id.play_button);
-            cam_video = itemView.findViewById(R.id.cam_video);
-            status_bar = itemView.findViewById(R.id.status_bar);
+            cam_video = itemView.findViewById(R.id.camVideo);
+            status_bar = itemView.findViewById(R.id.statusBar);
             view = itemView.findViewById(R.id.view);
             swipeLayout = itemView.findViewById(R.id.door_swipe);
             edit = itemView.findViewById(R.id.edit);
