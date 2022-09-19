@@ -10,7 +10,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        gradlePluginPortal()
     }
 }
+
 rootProject.name = "ForExample"
 include ':app'

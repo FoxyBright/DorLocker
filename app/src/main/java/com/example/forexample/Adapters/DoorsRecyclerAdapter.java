@@ -24,7 +24,6 @@ import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import com.example.forexample.Models.Door;
 import com.example.forexample.Fragments.IntercomFragment;
 import com.example.forexample.R;
-import com.example.forexample.Services.DataBase.Database;
 
 import java.util.List;
 
@@ -69,17 +68,15 @@ public class DoorsRecyclerAdapter extends RecyclerSwipeAdapter<DoorsRecyclerAdap
             holder.roundedImageView.setClipToOutline(true);
             holder.view.setVisibility(View.VISIBLE);
         }
-        Database db = Database.getInstance(context);
         holder.star.setOnClickListener(view -> {
             if (doors.get(position).getFavorites()) {
-                db.DAO().setDoorFavorite(doors.get(position).getId(), false);
+//                db.DAO().setDoorFavorite(doors.get(position).getId(), false);
                 Toast.makeText(view.getContext(), "Дверь " + holder.door_name.getText().toString() + " удалена из Избранного", Toast.LENGTH_SHORT).show();
             } else {
-                db.DAO().setDoorFavorite(doors.get(position).getId(), true);
+//                db.DAO().setDoorFavorite(doors.get(position).getId(), true);
                 Toast.makeText(view.getContext(), "Дверь " + holder.door_name.getText().toString() + " добавлена в Избранное", Toast.LENGTH_SHORT).show();
             }
         });
-
         holder.edit.setOnClickListener(view -> {
             AlertDialog.Builder editData = new AlertDialog.Builder(context, R.style.AlertDialogTheme);
             editData.setTitle("Введите новое имя двери");
@@ -89,7 +86,8 @@ public class DoorsRecyclerAdapter extends RecyclerSwipeAdapter<DoorsRecyclerAdap
             doorName.setText(holder.door_name.getText().toString());
             editData.setView(doorName);
             editData.setPositiveButton("Сохранить", (dialogInterface, i) -> {
-                db.DAO().setDoorName(doors.get(position).getId(), doorName.getText().toString());
+                Door door = new Door();
+                door.renamedDoor(doors.get(position).getId(), doorName.getText().toString());
                 Toast.makeText(context, "Название двери изменено", Toast.LENGTH_SHORT).show();
             });
             editData.setNegativeButton("Отмена", (dialogInterface, i) -> dialogInterface.cancel());

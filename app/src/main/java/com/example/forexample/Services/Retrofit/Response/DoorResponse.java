@@ -1,19 +1,16 @@
-package com.example.forexample.Services.Retrofit.Requests;
+package com.example.forexample.Services.Retrofit.Response;
 
 import java.util.List;
 
 import com.example.forexample.Models.Door;
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class DoorRequest implements Request {
+public class DoorResponse{
 
     @SerializedName("data")
-    @Expose
     private final List<Door> doors = null;
 
-    @Override
-    public List<Door> getData() {
+    public List<Door> getDoors() {
         return doors;
     }
 }

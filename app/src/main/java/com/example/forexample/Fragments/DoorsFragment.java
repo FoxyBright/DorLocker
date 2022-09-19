@@ -12,12 +12,14 @@ import android.view.ViewGroup;
 
 import com.daimajia.swipe.util.Attributes;
 import com.example.forexample.Adapters.DoorsRecyclerAdapter;
+import com.example.forexample.Models.Door;
 import com.example.forexample.R;
-import com.example.forexample.Services.DataBase.Database;
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.realm.Realm;
 
 public class DoorsFragment extends Fragment {
+
+    Realm realm;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -25,13 +27,19 @@ public class DoorsFragment extends Fragment {
 
         RecyclerView recycler = view.findViewById(R.id.recycler);
         recycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        Database.getInstance(getActivity()).DAO().getDoors().observeOn(AndroidSchedulers.mainThread()).subscribe(doors -> {
-            DoorsRecyclerAdapter adapter = new DoorsRecyclerAdapter(getActivity(), doors);
+        realm = Realm.getDefaultInstance();
+        realm.addChangeListener(realm -> {
+            DoorsRecyclerAdapter adapter = new DoorsRecyclerAdapter(getActivity(),
+                    realm.where(Door.class).findAll());
             ((DoorsRecyclerAdapter) adapter).setMode(Attributes.Mode.Single);
             recycler.setAdapter(adapter);
         });
-
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        realm.close();
     }
 }

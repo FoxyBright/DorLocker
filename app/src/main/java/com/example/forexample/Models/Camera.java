@@ -1,45 +1,25 @@
 package com.example.forexample.Models;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
+import android.util.Log;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import androidx.annotation.NonNull;
 
-import java.io.Serializable;
+import com.example.forexample.Services.Retrofit.Response.CamerasResponse;
+import com.example.forexample.Services.Retrofit.RetrofitAPI;
 
-@Entity
-public class Camera implements Serializable {
+import io.realm.Realm;
+import io.realm.RealmObject;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-    @SerializedName("name")
-    @Expose
-    @ColumnInfo(name = "name")
+public class Camera extends RealmObject {
+
     private String name;
-
-    @SerializedName("snapshot")
-    @Expose
-    @ColumnInfo(name = "snapshot")
     private String snapshot;
-
-    @SerializedName("room")
-    @Expose
-    @ColumnInfo(name = "room")
     private String room;
-
-    @SerializedName("id")
-    @Expose
-    @PrimaryKey()
     private Integer id;
-
-    @SerializedName("favorites")
-    @Expose
-    @ColumnInfo(name = "favorites")
     private Boolean favorites;
-
-    @SerializedName("rec")
-    @Expose
-    @ColumnInfo(name = "rec")
     private Boolean rec;
 
     public void setSnapshot(String snapshot) {
@@ -88,5 +68,36 @@ public class Camera implements Serializable {
 
     public Boolean getRec() {
         return rec;
+    }
+
+    public void getCameras() {
+
+        Call<CamerasResponse> getCamerasCall = RetrofitAPI.getInstance().getAPI().getCameras();
+        getCamerasCall.enqueue(new Callback<CamerasResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<CamerasResponse> call, @NonNull Response<CamerasResponse> response) {
+                Realm realm = Realm.getDefaultInstance();
+                realm.executeTransactionAsync(realm1 -> {
+                    realm1.where(Camera.class).findAll().deleteAllFromRealm();
+                    Camera c;
+                    assert response.body() != null;
+                    for (Camera camera : response.body().getCameras()) {
+                        c = realm1.createObject(Camera.class);
+                        c.setId(camera.getId());
+                        c.setName(camera.getName());
+                        c.setFavorites(camera.getFavorites());
+                        c.setRec(camera.getRec());
+                        c.setRoom(camera.getRoom());
+                        c.setSnapshot(camera.getSnapshot());
+                    }
+                });
+                realm.close();
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<CamerasResponse> call, @NonNull Throwable t) {
+                Log.d("Error", "Doors get data failed");
+            }
+        });
     }
 }

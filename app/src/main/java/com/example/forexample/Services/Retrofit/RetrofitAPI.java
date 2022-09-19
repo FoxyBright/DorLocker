@@ -8,7 +8,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitAPI {
-    public static final String BASE_URL = "http://cars.cprogroup.ru/";
+    public static final String BASE_URL =  "http://cars.cprogroup.ru/";
     public static Retrofit mRetrofit;
     private static RetrofitAPI mInstance;
 

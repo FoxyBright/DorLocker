@@ -12,12 +12,14 @@ import android.view.ViewGroup;
 
 import com.daimajia.swipe.util.Attributes;
 import com.example.forexample.Adapters.CamerasRecyclerAdapter;
+import com.example.forexample.Models.Camera;
 import com.example.forexample.R;
-import com.example.forexample.Services.DataBase.Database;
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.realm.Realm;
 
 public class CamerasFragment extends Fragment {
+
+    Realm realm;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -25,13 +27,19 @@ public class CamerasFragment extends Fragment {
 
         RecyclerView recycler = view.findViewById(R.id.recycler);
         recycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        Database.getInstance(getActivity()).DAO().getCameras().observeOn(AndroidSchedulers.mainThread()).subscribe(cameras -> {
-            CamerasRecyclerAdapter adapter = new CamerasRecyclerAdapter(getActivity(), cameras);
+        realm = Realm.getDefaultInstance();
+        realm.addChangeListener(realm -> {
+            CamerasRecyclerAdapter adapter = new CamerasRecyclerAdapter(getActivity(),
+                    realm.where(Camera.class).findAll());
             ((CamerasRecyclerAdapter) adapter).setMode(Attributes.Mode.Single);
             recycler.setAdapter(adapter);
         });
-
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        realm.close();
     }
 }

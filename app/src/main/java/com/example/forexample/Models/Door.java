@@ -1,35 +1,22 @@
 package com.example.forexample.Models;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
+import android.util.Log;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import androidx.annotation.NonNull;
 
-import java.io.Serializable;
+import com.example.forexample.Services.Retrofit.Response.DoorResponse;
+import com.example.forexample.Services.Retrofit.RetrofitAPI;
 
-@Entity
-public class Door implements Serializable {
+import io.realm.Realm;
+import io.realm.RealmObject;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-    @SerializedName("name")
-    @Expose
-    @ColumnInfo(name = "name")
+public class Door extends RealmObject {
     private String name;
-
-    @SerializedName("id")
-    @Expose
-    @PrimaryKey()
     private int id;
-
-    @SerializedName("snapshot")
-    @Expose
-    @ColumnInfo(name = "snapshot")
     private String snapshot;
-
-    @SerializedName("favorites")
-    @Expose
-    @ColumnInfo(name = "favorites")
     private Boolean favorites;
 
     public void setSnapshot(String snapshot) {
@@ -64,4 +51,43 @@ public class Door implements Serializable {
         return snapshot;
     }
 
+    public void getDoors() {
+
+        Call<DoorResponse> getDoorsCall = RetrofitAPI.getInstance().getAPI().getDoors();
+        getDoorsCall.enqueue(new Callback<DoorResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<DoorResponse> call, @NonNull Response<DoorResponse> response) {
+                Realm realm = Realm.getDefaultInstance();
+                realm.executeTransactionAsync(realm1 -> {
+                    realm1.where(Door.class).findAll().deleteAllFromRealm();
+                    Door d;
+                    assert response.body() != null;
+                    for (Door door : response.body().getDoors()) {
+                        d = realm1.createObject(Door.class);
+                        d.setId(door.getId());
+                        d.setName(door.getName());
+                        d.setFavorites(door.getFavorites());
+                        d.setSnapshot(door.getSnapshot());
+                    }
+                });
+                realm.close();
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<DoorResponse> call, @NonNull Throwable t) {
+                Log.d("Error", "Doors get data failed");
+            }
+        });
+    }
+
+    public void renamedDoor(int id, String name){
+        Realm realm = Realm.getDefaultInstance();
+        realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                realm.where(Door.class).equalTo("id", id).findFirst().setName(name);
+            }
+        });
+        realm.close();
+    }
 }
