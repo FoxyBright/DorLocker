@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
@@ -36,10 +35,8 @@ public class IntercomFragment extends Fragment {
         crossed_out_eye_button = view.findViewById(R.id.crossedOutEyeButton);
         openDoor.setOnClickListener(v -> Toast.makeText(getActivity(), "Дверь открыта", Toast.LENGTH_SHORT).show());
         back_button.setOnClickListener(v -> {
-            FragmentManager manager = getFragmentManager();
-            assert manager != null;
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.remove(Objects.requireNonNull(manager.findFragmentByTag("FragmentTransaction")));
+            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+            transaction.remove(Objects.requireNonNull(getParentFragmentManager().findFragmentByTag("FragmentTransaction")));
             transaction.commit();
         });
         settings.setOnClickListener(v -> {
